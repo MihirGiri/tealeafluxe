@@ -24,7 +24,7 @@ const getImageUrl = (imagePath) => {
   if (!imagePath) return FALLBACK_IMAGE;
   if (imagePath.startsWith("http")) return imagePath; // Already full URL
   if (imagePath.startsWith("/uploads/")) {
-    return `http://localhost:5000${imagePath}`; // Prepend backend URL
+    return `https://tealeafluxe.onrender.com${imagePath}`; // Prepend backend URL
   }
   return imagePath; // Keep as is for static data
 };
@@ -46,7 +46,7 @@ export default function ProductDetail() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
