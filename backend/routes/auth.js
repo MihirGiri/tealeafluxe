@@ -4,30 +4,6 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// Setup admin (Temporary route)
-router.get("/setup-admin", async (req, res) => {
-  try {
-    const newPassword = "Tealeaf@Admin831013";
-    let adminUser = await User.findOne({ email: "admin@tealeaf.com" });
-    if (adminUser) {
-      adminUser.password = newPassword;
-    } else {
-      adminUser = new User({
-        name: "Admin",
-        email: "admin@tealeaf.com",
-        password: newPassword,
-        role: "admin",
-        phone: "+91-1234567890",
-        address: "TeaLeaf HQ, India",
-      });
-    }
-    await adminUser.save();
-    res.json({ success: true, message: "Admin user ready! You can login now." });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
-
 // Signup
 router.post("/signup", async (req, res) => {
   try {
