@@ -14,15 +14,21 @@ router.get("/", async (req, res) => {
     // If no offers found, create some defaults just so we don't break the frontend initially
     if (offers.length === 0) {
       const defaultOffers = [
-        { discount: "10%", minAmount: "₹2000+" },
-        { discount: "12%", minAmount: "₹3000+" },
+        { text: "🎉 Flat 10% off on the purchase of ₹2000+" },
+        { text: "🎉 Flat 12% off on the purchase of ₹3000+" },
       ];
       await BannerOffer.insertMany(defaultOffers);
       const newOffers = await BannerOffer.find({ active: true });
-      return res.json({ success: true, offers: newOffers });
     }
 
-    res.json({ success: true, offers });
+    const processedOffers = offers.map(o => {
+      if (!o.text && o.discount) {
+        return { ...o._doc, text: `🎉 Flat ${o.discount} off on the purchase of ${o.minAmount}` };
+      }
+      return o;
+    });
+
+    res.json({ success: true, offers: processedOffers });
   } catch (error) {
     console.error("Error fetching banner offers:", error);
     res.status(500).json({ success: false, message: "Server Error" });
@@ -35,7 +41,15 @@ router.get("/", async (req, res) => {
 router.get("/admin", verifyAdmin, async (req, res) => {
   try {
     const offers = await BannerOffer.find({});
-    res.json({ success: true, offers });
+    
+    const processedOffers = offers.map(o => {
+      if (!o.text && o.discount) {
+        return { ...o._doc, text: `🎉 Flat ${o.discount} off on the purchase of ${o.minAmount}` };
+      }
+      return o;
+    });
+
+    res.json({ success: true, offers: processedOffers });
   } catch (error) {
     console.error("Error fetching banner offers for admin:", error);
     res.status(500).json({ success: false, message: "Server Error" });
@@ -47,11 +61,10 @@ router.get("/admin", verifyAdmin, async (req, res) => {
 // @access  Private/Admin
 router.post("/", verifyAdmin, async (req, res) => {
   try {
-    const { discount, minAmount, active } = req.body;
+    const { text, active } = req.body;
     
     const offer = new BannerOffer({
-      discount,
-      minAmount,
+      text,
       active: active !== undefined ? active : true,
     });
 
@@ -68,7 +81,7 @@ router.post("/", verifyAdmin, async (req, res) => {
 // @access  Private/Admin
 router.put("/:id", verifyAdmin, async (req, res) => {
   try {
-    const { discount, minAmount, active } = req.body;
+    const { text, active } = req.body;
     
     const offer = await BannerOffer.findById(req.params.id);
 
@@ -76,8 +89,7 @@ router.put("/:id", verifyAdmin, async (req, res) => {
       return res.status(404).json({ success: false, message: "Offer not found" });
     }
 
-    offer.discount = discount || offer.discount;
-    offer.minAmount = minAmount || offer.minAmount;
+    offer.text = text || offer.text;
     if (active !== undefined) {
       offer.active = active;
     }

@@ -242,7 +242,7 @@ export default function Navbar() {
                     transition={{ duration: 0.4 }}
                     className="text-center text-sm font-medium text-primary"
                   >
-                    🎉 <span className="font-semibold">Flat {offers[currentOfferIndex].discount} off</span> on the purchase of {offers[currentOfferIndex].minAmount}
+                    {offers[currentOfferIndex].text}
                   </motion.div>
                 )}
               </AnimatePresence>

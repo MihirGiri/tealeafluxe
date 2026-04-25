@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 
 const bannerOfferSchema = new mongoose.Schema(
   {
-    discount: {
-      type: String,
-      required: true,
-    },
-    minAmount: {
+    text: {
       type: String,
       required: true,
     },

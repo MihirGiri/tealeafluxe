@@ -24,8 +24,7 @@ export default function ManageBannerOffers() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [formData, setFormData] = useState({
-    discount: "",
-    minAmount: "",
+    text: "",
     active: true,
   });
 
@@ -76,8 +75,8 @@ export default function ManageBannerOffers() {
     setError("");
     setSuccess("");
 
-    if (!formData.discount || !formData.minAmount) {
-      setError("Discount and Min Amount are required!");
+    if (!formData.text) {
+      setError("Text is required!");
       return;
     }
 
@@ -147,8 +146,7 @@ export default function ManageBannerOffers() {
   const handleEdit = (offer) => {
     setEditingOffer(offer);
     setFormData({
-      discount: offer.discount,
-      minAmount: offer.minAmount,
+      text: offer.text,
       active: offer.active,
     });
     setShowModal(true);
@@ -156,8 +154,7 @@ export default function ManageBannerOffers() {
 
   const resetForm = () => {
     setFormData({
-      discount: "",
-      minAmount: "",
+      text: "",
       active: true,
     });
     setError("");
@@ -304,11 +301,8 @@ export default function ManageBannerOffers() {
                   </span>
                 )}
                 <div className="mb-6">
-                  <p className="text-2xl font-semibold text-primary mb-1">
-                    Flat {offer.discount} off
-                  </p>
-                  <p className="text-foreground/70">
-                    on the purchase of {offer.minAmount}
+                  <p className="text-xl font-semibold text-primary mb-1">
+                    {offer.text}
                   </p>
                 </div>
                 {/* Actions */}
@@ -365,33 +359,18 @@ export default function ManageBannerOffers() {
 
                 {/* Modal Content */}
                 <form onSubmit={handleSubmit} className="p-6 space-y-6">
-                  {/* Discount */}
+                  {/* Text */}
                   <div>
                     <label className="block text-sm font-semibold text-foreground mb-2">
-                      Discount (e.g., "10%" or "₹500") *
+                      Banner Text (e.g., "🎉 Flat 10% off on all orders") *
                     </label>
-                    <input
-                      type="text"
-                      name="discount"
-                      value={formData.discount}
+                    <textarea
+                      name="text"
+                      value={formData.text}
                       onChange={handleInputChange}
-                      placeholder="10%"
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
-
-                  {/* Min Amount */}
-                  <div>
-                    <label className="block text-sm font-semibold text-foreground mb-2">
-                      Condition (e.g., "₹2000+" or "2 items") *
-                    </label>
-                    <input
-                      type="text"
-                      name="minAmount"
-                      value={formData.minAmount}
-                      onChange={handleInputChange}
-                      placeholder="₹2000+"
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="🎉 Flat 10% off on all orders"
+                      rows="3"
+                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                     />
                   </div>
 
