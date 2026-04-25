@@ -1,6 +1,5 @@
 import { Filter, X } from "lucide-react";
 import categories from "../data/categories";
-import products from "../data/products";
 
 const PRICE_MIN = 0;
 const PRICE_MAX = 5000;
@@ -8,6 +7,7 @@ const PRICE_MAX = 5000;
 export { PRICE_MIN, PRICE_MAX };
 
 export default function FilterSidebar({
+  products = [],
   activeCategories,
   onToggleCategory,
   priceMin,

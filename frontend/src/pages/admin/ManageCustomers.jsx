@@ -41,7 +41,7 @@ export default function ManageCustomers() {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://tealeafluxe.onrender.com/api/customers?sort=${sortBy}`,
+          `http://localhost:5000/api/customers?sort=${sortBy}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export default function ManageCustomers() {
 
     try {
       const response = await fetch(
-        `https://tealeafluxe.onrender.com/api/customers/${selectedCustomer._id}`,
+        `http://localhost:5000/api/customers/${selectedCustomer._id}`,
         {
           method: "PUT",
           headers: {
@@ -132,7 +132,7 @@ export default function ManageCustomers() {
 
     try {
       const response = await fetch(
-        `https://tealeafluxe.onrender.com/api/customers/${customerId}`,
+        `http://localhost:5000/api/customers/${customerId}`,
         {
           method: "DELETE",
           headers: {

@@ -44,7 +44,7 @@ export default function Chatbot() {
         // Assume user entered an order number
         setAwaitingOrderNumber(false);
         try {
-          const response = await fetch("https://tealeafluxe.onrender.com/api/orders/track", {
+          const response = await fetch("http://localhost:5000/api/orders/track", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ orderNumber: userMessage.text.trim() }),

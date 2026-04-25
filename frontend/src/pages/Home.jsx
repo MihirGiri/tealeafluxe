@@ -16,7 +16,6 @@ import SectionContainer, {
   SectionHeading,
 } from "../components/SectionContainer";
 import categories from "../data/categories";
-import staticProducts from "../data/products";
 import testimonials from "../data/testimonials";
 
 /* ── Fallback Hero slides ── */
@@ -430,7 +429,7 @@ function AboutPreviewSection() {
 export default function Home() {
   const [current, setCurrent] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [products, setProducts] = useState(staticProducts);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [heroSlides, setHeroSlides] = useState(fallbackHeroSlides);
   const [slidesLoading, setSlidesLoading] = useState(true);
@@ -440,7 +439,7 @@ export default function Home() {
     const fetchHeroSlides = async () => {
       try {
         setSlidesLoading(true);
-        const response = await fetch("https://tealeafluxe.onrender.com/api/hero-slides");
+        const response = await fetch("http://localhost:5000/api/hero-slides");
         const data = await response.json();
         if (data.success && data.slides && data.slides.length > 0) {
           setHeroSlides(data.slides);
@@ -460,7 +459,7 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch("http://localhost:5000/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);

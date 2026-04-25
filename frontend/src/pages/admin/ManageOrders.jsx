@@ -49,8 +49,8 @@ export default function ManageOrders() {
         setLoading(true);
         const url =
           statusFilter === "all"
-            ? "https://tealeafluxe.onrender.com/api/orders"
-            : `https://tealeafluxe.onrender.com/api/orders?status=${statusFilter}`;
+            ? "http://localhost:5000/api/orders"
+            : `http://localhost:5000/api/orders?status=${statusFilter}`;
 
         const response = await fetch(url, {
           headers: {
@@ -92,7 +92,7 @@ export default function ManageOrders() {
 
     try {
       const response = await fetch(
-        `https://tealeafluxe.onrender.com/api/orders/${selectedOrder._id}/status`,
+        `http://localhost:5000/api/orders/${selectedOrder._id}/status`,
         {
           method: "PUT",
           headers: {
@@ -127,7 +127,7 @@ export default function ManageOrders() {
 
     try {
       const response = await fetch(
-        `https://tealeafluxe.onrender.com/api/orders/${orderId}`,
+        `http://localhost:5000/api/orders/${orderId}`,
         {
           method: "DELETE",
           headers: {

@@ -10,8 +10,6 @@ import { EmptyState } from "../components/LoadingSpinner";
 import ProductCard from "../components/ProductCard";
 import SectionContainer from "../components/SectionContainer";
 import categories from "../data/categories";
-import staticProducts from "../data/products";
-
 const SORT_OPTIONS = [
   { value: "featured", label: "Featured" },
   { value: "price-asc", label: "Price: Low to High" },
@@ -21,7 +19,7 @@ const SORT_OPTIONS = [
 ];
 
 export default function Shop() {
-  const [products, setProducts] = useState(staticProducts);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDrawer, setShowDrawer] = useState(false);
   const [sort, setSort] = useState("featured");
@@ -36,14 +34,14 @@ export default function Shop() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch("http://localhost:5000/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
         }
       } catch (error) {
         console.error("Failed to fetch products:", error);
-        // Keep using static products as fallback
+        // Handle error appropriately
       } finally {
         setLoading(false);
       }
@@ -135,6 +133,7 @@ export default function Shop() {
   ]);
 
   const sidebarProps = {
+    products,
     activeCategories,
     onToggleCategory: handleToggleCategory,
     priceMin,

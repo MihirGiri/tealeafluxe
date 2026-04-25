@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import products from "../data/products";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -104,11 +103,9 @@ export default function Navbar() {
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const [showBanner, setShowBanner] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  
-  const offers = [
-    { discount: "10%", minAmount: "₹2000+" },
-    { discount: "12%", minAmount: "₹3000+" },
-  ];
+  const [products, setProducts] = useState([]);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [offers, setOffers] = useState([]);
 
   const { cartCount } = useCart();
   const { user, logout, isAdmin } = useAuth();
@@ -124,6 +121,35 @@ export default function Navbar() {
       ).slice(0, 5)
     : [];
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/products");
+        const data = await response.json();
+        if (data.success && data.products) {
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products in navbar:", error);
+      }
+    };
+
+    const fetchOffers = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/banner-offers");
+        const data = await response.json();
+        if (data.success && data.offers && data.offers.length > 0) {
+          setOffers(data.offers);
+        }
+      } catch (error) {
+        console.error("Failed to fetch banner offers:", error);
+      }
+    };
+
+    fetchProducts();
+    fetchOffers();
+  }, []);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -133,22 +159,25 @@ export default function Navbar() {
       });
       setSearchQuery("");
       setShowSuggestions(false);
+      setMobileSearchOpen(false);
     }
   };
 
   const handleProductClick = (product) => {
     navigate({
       to: "/product/$id",
-      params: { id: product.id },
+      params: { id: product.id || product._id },
     });
     setSearchQuery("");
     setShowSuggestions(false);
+    setMobileSearchOpen(false);
   };
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: close mobile drawer on route change
   useEffect(() => {
     setMobileOpen(false);
     setShowUserMenu(false);
+    setMobileSearchOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -182,6 +211,7 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   useEffect(() => {
+    if (offers.length === 0) return;
     const interval = setInterval(() => {
       setCurrentOfferIndex((prevIndex) => (prevIndex + 1) % offers.length);
     }, 6000);
@@ -194,7 +224,7 @@ export default function Navbar() {
     <>
       {/* Promotional Banner */}
       <AnimatePresence>
-        {showBanner && (
+        {showBanner && offers.length > 0 && (
           <motion.div
             initial={{ y: 0, opacity: 1 }}
             exit={{ y: -40, opacity: 0 }}
@@ -203,16 +233,18 @@ export default function Navbar() {
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentOfferIndex}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                  className="text-center text-sm font-medium text-primary"
-                >
-                  🎉 <span className="font-semibold">Flat {offers[currentOfferIndex].discount} off</span> on the purchase of {offers[currentOfferIndex].minAmount}
-                </motion.div>
+                {offers[currentOfferIndex] && (
+                  <motion.div
+                    key={currentOfferIndex}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-center text-sm font-medium text-primary"
+                  >
+                    🎉 <span className="font-semibold">Flat {offers[currentOfferIndex].discount} off</span> on the purchase of {offers[currentOfferIndex].minAmount}
+                  </motion.div>
+                )}
               </AnimatePresence>
             </div>
           </motion.div>
@@ -221,8 +253,8 @@ export default function Navbar() {
 
       <header
         data-ocid="navbar"
-        className={`fixed left-0 right-0 z-40 bg-card/98 backdrop-blur-sm shadow-card border-b border-border transition-all duration-300 pointer-events-auto ${
-          showBanner ? "top-[2.5rem]" : "top-0"
+        className={`fixed left-0 right-0 z-40 bg-[#E4EBDD]/95 backdrop-blur-md shadow-card border-b border-[#D4DDD0] transition-all duration-300 pointer-events-auto ${
+          showBanner && offers.length > 0 ? "top-[2.5rem]" : "top-0"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -264,7 +296,17 @@ export default function Navbar() {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-5 flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-5 flex-shrink-0">
+              {/* Mobile Search Button */}
+              <button
+                type="button"
+                className="sm:hidden w-9 h-9 flex items-center justify-center rounded-full text-foreground/60 hover:text-primary hover:bg-primary/8 transition-smooth"
+                onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+                aria-label="Toggle search"
+              >
+                <Search size={18} />
+              </button>
+
               <div ref={searchRef} className="hidden sm:flex flex-col relative">
                 <form onSubmit={handleSearch} className="flex items-center gap-2 bg-muted/50 rounded-full px-3 py-2 border border-border/50 hover:border-border transition-smooth">
                   <Search size={16} className="text-foreground/50" />
@@ -398,6 +440,46 @@ export default function Navbar() {
                                   Products
                                 </Link>
                                 <Link
+                                  to="/admin/hero-slides"
+                                  onClick={() => setShowUserMenu(false)}
+                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm"
+                                >
+                                  <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
+                                  </svg>
+                                  Hero Slides
+                                </Link>
+                                <Link
+                                  to="/admin/banner-offers"
+                                  onClick={() => setShowUserMenu(false)}
+                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
+                                >
+                                  <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
+                                    />
+                                  </svg>
+                                  Banner Offers
+                                </Link>
+                                <Link
                                   to="/admin/analytics"
                                   onClick={() => setShowUserMenu(false)}
                                   className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
@@ -506,6 +588,69 @@ export default function Navbar() {
             </div>
           </div>
         </div>
+
+        {/* Mobile Search Bar Dropdown */}
+        <AnimatePresence>
+          {mobileSearchOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="sm:hidden border-t border-border bg-card overflow-hidden"
+            >
+              <div className="p-4">
+                <form onSubmit={handleSearch} className="flex items-center gap-2 bg-muted/50 rounded-full px-4 py-2 border border-border/50 focus-within:border-primary/50 transition-smooth">
+                  <Search size={16} className="text-foreground/50" />
+                  <input
+                    type="text"
+                    placeholder="Search for teas..."
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setShowSuggestions(e.target.value.length > 0);
+                    }}
+                    autoFocus
+                    className="bg-transparent text-sm font-body placeholder:text-foreground/40 outline-none w-full text-foreground"
+                  />
+                </form>
+                {/* Mobile Search Suggestions */}
+                <AnimatePresence>
+                  {showSuggestions && filteredProducts.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      className="mt-2 bg-card border border-border rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto"
+                    >
+                      {filteredProducts.map((product) => (
+                        <button
+                          key={product.id || product._id}
+                          onClick={() => handleProductClick(product)}
+                          className="w-full flex items-center gap-3 px-3 py-2 hover:bg-muted/60 transition-smooth text-left border-b border-border/30 last:border-b-0"
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-10 h-10 rounded object-cover"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-foreground truncate">
+                              {product.name}
+                            </p>
+                            <p className="text-xs text-foreground/50">
+                              ₹{product.price.toLocaleString("en-IN")}
+                            </p>
+                          </div>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Mobile Drawer */}

@@ -51,7 +51,7 @@ function CartItemRow({ item, index }) {
       >
         <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-secondary/40 ring-1 ring-border/60">
           <img
-            src={item.image?.startsWith('/uploads') ? `https://tealeafluxe.onrender.com${item.image}` : item.image}
+            src={item.image?.startsWith('/uploads') ? `http://localhost:5000${item.image}` : item.image}
             alt={item.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
           />

@@ -22,7 +22,7 @@ export default function MyOrders() {
     const fetchOrders = async () => {
       if (!token) return;
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/orders/user/my-orders", {
+        const response = await fetch("http://localhost:5000/api/orders/user/my-orders", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -128,7 +128,7 @@ export default function MyOrders() {
                       <div key={idx} className="flex gap-4 items-center">
                         <div className="w-16 h-16 rounded-xl bg-muted overflow-hidden shrink-0">
                           {item.product?.image ? (
-                            <img src={item.product.image.startsWith('/uploads') ? `https://tealeafluxe.onrender.com${item.product.image}` : item.product.image} alt={item.product.name} className="w-full h-full object-cover" />
+                            <img src={item.product.image.startsWith('/uploads') ? `http://localhost:5000${item.product.image}` : item.product.image} alt={item.product.name} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center bg-secondary/50 text-xs text-muted-foreground">No Image</div>
                           )}
