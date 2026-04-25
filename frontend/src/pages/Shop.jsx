@@ -34,7 +34,7 @@ export default function Shop() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);

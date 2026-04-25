@@ -439,7 +439,7 @@ export default function Home() {
     const fetchHeroSlides = async () => {
       try {
         setSlidesLoading(true);
-        const response = await fetch("http://localhost:5000/api/hero-slides");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/hero-slides");
         const data = await response.json();
         if (data.success && data.slides && data.slides.length > 0) {
           setHeroSlides(data.slides);
@@ -459,7 +459,7 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);

@@ -17,7 +17,7 @@ export default function Wishlist() {
     
     const fetchWishlist = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/wishlist", {
+        const response = await fetch("https://tealeafluxe.onrender.com/api/wishlist", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
