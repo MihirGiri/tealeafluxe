@@ -19,7 +19,7 @@ const categories = [
       "Fully oxidised teas with bold, complex flavour profiles — from malty Assam to delicate Darjeeling muscatel.",
     /* Tea ceremony pour */
     image:
-      "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&h=600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&h=600&q=80&auto=format&fit=crop",
     /* Loose leaf black tea */
     hoverImage:
       "https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?w=600&h=600&q=80&auto=format&fit=crop",
@@ -65,29 +65,16 @@ const categories = [
     count: 2,
   },
   {
-    id: "oolong",
-    name: "Oolong",
-    description:
-      "Partially oxidised teas ranging from floral high-mountain varieties to richly roasted aged expressions.",
-    /* Cast iron teapot / oolong tea */
-    image:
-      "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&h=600&q=80&auto=format&fit=crop",
-    /* Oolong tea leaves */
-    hoverImage:
-      "https://images.unsplash.com/photo-1629367494173-c78a56567877?w=600&h=600&q=80&auto=format&fit=crop",
-    count: 1,
-  },
-  {
     id: "chai",
     name: "Chai",
     description:
       "Aromatic spiced blends with warming spices, perfect for a cosy cup or traditional preparation with milk.",
     /* Chai tea with spices */
     image:
-      "https://images.unsplash.com/photo-1597318172845-4995fa412ceb?w=600&h=600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?w=600&h=600&q=80&auto=format&fit=crop",
     /* Chai tea brewing */
     hoverImage:
-      "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600&h=600&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&h=600&q=80&auto=format&fit=crop",
     count: 1,
   },
 ];

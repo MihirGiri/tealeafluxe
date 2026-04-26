@@ -73,7 +73,7 @@ const GALLERY_ITEMS = [
     description:
       "A slow, deliberate pour — water at exactly 85°C dancing across first-flush Darjeeling leaves, unlocking layers of muscatel and wildflower fragrance.",
     image:
-      "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80&auto=format&fit=crop",
     aspect: "portrait",
   },
   {
@@ -83,7 +83,7 @@ const GALLERY_ITEMS = [
     description:
       "Premium orthodox tea requires only two leaves and a bud — the industry standard that separates the exceptional from the ordinary. Quality always over speed.",
     image:
-      "https://images.unsplash.com/photo-1629367494173-c78a56567877?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=80&auto=format&fit=crop",
     aspect: "square",
   },
   {
@@ -143,7 +143,7 @@ const GALLERY_ITEMS = [
     description:
       "Before the day's heat arrives, Darjeeling's terraces glow in the gold of a new morning — mist threading through ancient tea bushes that have stood for 150 years.",
     image:
-      "https://images.unsplash.com/photo-1546877625-cb8c71916608?w=800&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?w=800&q=80&auto=format&fit=crop",
     aspect: "portrait",
   },
   {
@@ -553,7 +553,7 @@ export default function Gallery() {
       </div>
 
       {/* ── Category filter tabs ── */}
-      <div className="sticky top-16 lg:top-20 z-30 bg-card/96 backdrop-blur-md border-b border-border">
+      <div className="bg-card/96 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
             {CATEGORIES.map((cat) => {

@@ -130,7 +130,7 @@ export default function Contact() {
       <div className="relative overflow-hidden min-h-[520px] md:min-h-[600px] flex items-center">
         {/* Background image */}
         <img
-          src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=1400&h=800&q=80&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=1400&h=800&q=80&auto=format&fit=crop"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center"

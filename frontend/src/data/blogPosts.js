@@ -28,7 +28,7 @@ const blogPosts = [
     category: "Tea Culture",
     /* Tea ceremony setup — Assam estate atmosphere */
     image:
-      "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=800&h=500&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&h=500&q=80&auto=format&fit=crop",
     readTime: 7,
     featured: false,
     tags: ["Assam", "Black Tea", "Brewing", "Chai"],

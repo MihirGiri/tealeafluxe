@@ -214,7 +214,7 @@ const teamMembers = [
     imageUrl:
       "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=400&q=80&auto=format&fit=crop",
     fallbackUrl:
-      "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=400&h=400&q=80&auto=format&fit=crop",
   },
   {
     name: "Priya Nair",

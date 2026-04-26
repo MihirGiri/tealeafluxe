@@ -155,7 +155,7 @@ export default function Shop() {
           className="absolute inset-0 w-full h-full object-cover object-center"
           onError={(e) => {
             e.target.src =
-              "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=1920&h=800&q=80&auto=format&fit=crop";
+              "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=1920&h=800&q=80&auto=format&fit=crop";
             e.target.onerror = null;
           }}
         />
