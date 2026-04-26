@@ -166,69 +166,19 @@ export default function ManageBannerOffers() {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
-      <SectionContainer>
-        {/* Header */}
-        <div className="flex items-center justify-between mb-12">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="font-display text-4xl font-semibold text-foreground flex items-center gap-3">
-              <Megaphone className="text-primary" size={32} />
+            <h1 className="font-display text-3xl font-semibold text-foreground flex items-center gap-3">
+              <Megaphone className="text-primary" size={28} />
               Manage Banner Offers
             </h1>
             <p className="text-foreground/60 mt-2">Edit your promotional banner texts</p>
           </motion.div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-500/20 transition-smooth"
-          >
-            <LogOut size={18} />
-            Logout
-          </motion.button>
-        </div>
-
-        {/* Admin Navigation */}
-        <div className="flex items-center gap-3 mb-8 overflow-x-auto pb-2 border-b border-border">
-          <Link
-            to="/admin/dashboard"
-            className="px-4 py-2 rounded-lg bg-muted/50 text-foreground hover:bg-muted transition-smooth font-medium whitespace-nowrap"
-          >
-            Products
-          </Link>
-          <Link
-            to="/admin/hero-slides"
-            className="px-4 py-2 rounded-lg bg-muted/50 text-foreground hover:bg-muted transition-smooth font-medium whitespace-nowrap"
-          >
-            Hero Slides
-          </Link>
-          <Link
-            to="/admin/banner-offers"
-            className="px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium whitespace-nowrap"
-          >
-            Banner Offers
-          </Link>
-          <Link
-            to="/admin/orders"
-            className="px-4 py-2 rounded-lg bg-muted/50 text-foreground hover:bg-muted transition-smooth font-medium whitespace-nowrap"
-          >
-            Orders
-          </Link>
-          <Link
-            to="/admin/customers"
-            className="px-4 py-2 rounded-lg bg-muted/50 text-foreground hover:bg-muted transition-smooth font-medium whitespace-nowrap"
-          >
-            Customers
-          </Link>
-          <Link
-            to="/admin/stats"
-            className="px-4 py-2 rounded-lg bg-muted/50 text-foreground hover:bg-muted transition-smooth font-medium whitespace-nowrap"
-          >
-            Stats
-          </Link>
         </div>
 
         {/* Messages */}
@@ -418,7 +368,7 @@ export default function ManageBannerOffers() {
             </motion.div>
           )}
         </AnimatePresence>
-      </SectionContainer>
+      </div>
     </div>
   );
 }

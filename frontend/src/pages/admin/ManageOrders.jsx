@@ -179,16 +179,16 @@ export default function ManageOrders() {
 
   if (loading) {
     return (
-      <SectionContainer>
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-center py-12">
           <RefreshCw className="w-8 h-8 animate-spin text-amber-600" />
         </div>
-      </SectionContainer>
+      </div>
     );
   }
 
   return (
-    <SectionContainer>
+    <div className="max-w-7xl mx-auto">
       <div className="py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
@@ -525,6 +525,6 @@ export default function ManageOrders() {
           </div>
         )}
       </div>
-    </SectionContainer>
+    </div>
   );
 }

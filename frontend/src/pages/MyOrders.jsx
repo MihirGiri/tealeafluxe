@@ -46,6 +46,27 @@ export default function MyOrders() {
     }
   }, [token]);
 
+  const handleCancelOrder = async (orderId) => {
+    if (!window.confirm("Are you sure you want to cancel this order?")) return;
+    try {
+      const response = await fetch(`https://tealeafluxe.onrender.com/api/orders/${orderId}/cancel`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (data.success) {
+        setOrders(orders.map((o) => (o._id === orderId ? { ...o, status: "cancelled" } : o)));
+      } else {
+        alert(data.message || "Failed to cancel order");
+      }
+    } catch (err) {
+      alert("Error connecting to server to cancel order");
+    }
+  };
+
+
   const getStatusColor = (status) => {
     switch(status) {
       case 'pending': return 'bg-yellow-500/10 text-yellow-600';
@@ -118,6 +139,14 @@ export default function MyOrders() {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${getStatusColor(order.status)}`}>
                       {order.status}
                     </span>
+                    {order.status === "pending" && (
+                      <button
+                        onClick={() => handleCancelOrder(order._id)}
+                        className="ml-4 text-xs font-semibold text-red-600 hover:text-red-700 underline underline-offset-2 transition-colors"
+                      >
+                        Cancel Order
+                      </button>
+                    )}
                   </div>
                 </div>
 

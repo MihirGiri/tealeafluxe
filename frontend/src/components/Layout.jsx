@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import PageTransition from "./PageTransition";
 import Chatbot from "./Chatbot";
+import AdminLayout from "./AdminLayout";
 
 export default function Layout() {
   const location = useLocation();
@@ -15,7 +16,13 @@ export default function Layout() {
       {!hideHeaderFooter && <Navbar />}
       <main className="flex-1">
         <PageTransition>
-          <Outlet />
+          {location.pathname.startsWith("/admin") ? (
+            <AdminLayout>
+              <Outlet />
+            </AdminLayout>
+          ) : (
+            <Outlet />
+          )}
         </PageTransition>
       </main>
       {!hideHeaderFooter && <Footer />}
