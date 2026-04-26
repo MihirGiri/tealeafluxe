@@ -409,126 +409,51 @@ export default function Navbar() {
                               <User size={16} />
                               My Profile
                             </Link>
-                            <Link
-                              to="/my-orders"
-                              onClick={() => setShowUserMenu(false)}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
-                            >
-                              <Package size={16} />
-                              My Orders
-                            </Link>
-                            {isAdmin && (
+                            
+                            {!isAdmin && (
                               <>
                                 <Link
-                                  to="/admin/dashboard"
-                                  onClick={() => setShowUserMenu(false)}
-                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm"
-                                >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                                    />
-                                  </svg>
-                                  Products
-                                </Link>
-                                <Link
-                                  to="/admin/hero-slides"
-                                  onClick={() => setShowUserMenu(false)}
-                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm"
-                                >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                    />
-                                  </svg>
-                                  Hero Slides
-                                </Link>
-                                <Link
-                                  to="/admin/banner-offers"
+                                  to="/my-orders"
                                   onClick={() => setShowUserMenu(false)}
                                   className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
                                 >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
-                                    />
-                                  </svg>
-                                  Banner Offers
+                                  <Package size={16} />
+                                  My Orders
                                 </Link>
                                 <Link
-                                  to="/admin/analytics"
+                                  to="/wishlist"
                                   onClick={() => setShowUserMenu(false)}
-                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
+                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-red-500 text-sm border-b border-border/50"
                                 >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                                    />
-                                  </svg>
-                                  Analytics
-                                </Link>
-                                <Link
-                                  to="/admin/logs"
-                                  onClick={() => setShowUserMenu(false)}
-                                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
-                                >
-                                  <svg
-                                    className="w-4 h-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    />
-                                  </svg>
-                                  Activity Logs
+                                  <Heart size={16} />
+                                  Wishlist
                                 </Link>
                               </>
                             )}
-                            <Link
-                              to="/wishlist"
-                              onClick={() => setShowUserMenu(false)}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-red-500 text-sm border-b border-border/50"
-                            >
-                              <Heart size={16} />
-                              Wishlist
-                            </Link>
+
+                            {isAdmin && (
+                              <Link
+                                to="/admin/dashboard"
+                                onClick={() => setShowUserMenu(false)}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-muted/60 transition-smooth text-foreground/70 hover:text-primary text-sm border-b border-border/50"
+                              >
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                                  />
+                                </svg>
+                                Admin Panel
+                              </Link>
+                            )}
+
                             <button
                               onClick={() => {
                                 logout();

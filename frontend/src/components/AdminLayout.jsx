@@ -11,7 +11,8 @@ import {
   Menu,
   X,
   LogOut,
-  Leaf
+  Leaf,
+  Shield
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
@@ -32,6 +33,7 @@ export default function AdminLayout({ children }) {
     { name: "Banner Offers", path: "/admin/banner-offers", icon: Megaphone },
     { name: "Orders", path: "/admin/orders", icon: ShoppingCart },
     { name: "Customers", path: "/admin/customers", icon: Users },
+    { name: "Admins", path: "/admin/admins", icon: Shield },
     { name: "Stats / Analytics", path: "/admin/stats", icon: BarChart3 },
     { name: "Activity Logs", path: "#", icon: Activity },
   ];

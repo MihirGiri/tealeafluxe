@@ -30,6 +30,8 @@ import ManageCustomers from "./pages/admin/ManageCustomers";
 import ManageOrders from "./pages/admin/ManageOrders";
 import ManageHeroSlides from "./pages/admin/ManageHeroSlides";
 import ManageBannerOffers from "./pages/admin/ManageBannerOffers";
+import ManageAdmins from "./pages/admin/ManageAdmins";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Shop from "./pages/Shop";
@@ -134,6 +136,12 @@ const adminBannerOffersRoute = createRoute({
   path: "/admin/banner-offers",
   component: ManageBannerOffers,
 });
+
+const adminAdminsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/admin/admins",
+  component: ManageAdmins,
+});
 const wishlistRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/wishlist",
@@ -168,6 +176,7 @@ const routeTree = rootRoute.addChildren([
   adminOrdersRoute,
   adminHeroSlidesRoute,
   adminBannerOffersRoute,
+  adminAdminsRoute,
   wishlistRoute,
   checkoutRoute,
   myOrdersRoute,

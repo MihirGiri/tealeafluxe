@@ -3,6 +3,8 @@ import User from "../models/User.js";
 import Order from "../models/Order.js";
 import { authenticateToken } from "./auth.js";
 
+import bcrypt from "bcryptjs";
+
 const router = express.Router();
 
 // Middleware to check if user is admin
@@ -59,6 +61,47 @@ router.get("/", authenticateToken, isAdmin, async (req, res) => {
     res.status(500).json({
       success: false,
       message: error.message || "Error fetching customers",
+    });
+  }
+});
+
+// Create new admin (Admin only)
+router.post("/admin", authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: "Email already registered" });
+    }
+
+    const user = new User({
+      name,
+      email,
+      password,
+      role: "admin",
+    });
+
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Admin created successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Error creating admin",
     });
   }
 });
