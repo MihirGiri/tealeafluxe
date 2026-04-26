@@ -11,15 +11,6 @@ router.get("/", async (req, res) => {
   try {
     const offers = await BannerOffer.find({ active: true });
     
-    // If no offers found, create some defaults just so we don't break the frontend initially
-    if (offers.length === 0) {
-      const defaultOffers = [
-        { text: "🎉 Flat 10% off on the purchase of ₹2000+" },
-        { text: "🎉 Flat 12% off on the purchase of ₹3000+" },
-      ];
-      await BannerOffer.insertMany(defaultOffers);
-      const newOffers = await BannerOffer.find({ active: true });
-    }
 
     const processedOffers = offers.map(o => {
       if (!o.text && o.discount) {
