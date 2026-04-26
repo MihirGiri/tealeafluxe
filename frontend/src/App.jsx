@@ -31,7 +31,6 @@ import ManageOrders from "./pages/admin/ManageOrders";
 import ManageHeroSlides from "./pages/admin/ManageHeroSlides";
 import ManageBannerOffers from "./pages/admin/ManageBannerOffers";
 import ManageAdmins from "./pages/admin/ManageAdmins";
-import OrderConfirmation from "./pages/OrderConfirmation";
 import Wishlist from "./pages/Wishlist";
 import ProductDetail from "./pages/ProductDetail";
 import Shop from "./pages/Shop";

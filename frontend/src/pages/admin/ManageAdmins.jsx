@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Shield, Plus, Check, AlertCircle, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ManageAdmins() {
   const { token, user: currentUser } = useAuth();
