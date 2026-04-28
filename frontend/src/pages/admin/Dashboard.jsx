@@ -54,7 +54,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://swadistchai.onrender.com/api/products");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
         const data = await response.json();
         if (data.success) {
           setProducts(data.products);
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
     if (!imagePath) return "";
     if (imagePath.startsWith("http")) return imagePath;
     if (imagePath.startsWith("/uploads/")) {
-      return `https://swadistchai.onrender.com${imagePath}`;
+      return `https://tealeafluxe.onrender.com${imagePath}`;
     }
     return imagePath;
   };
@@ -116,8 +116,8 @@ export default function AdminDashboard() {
     try {
       const method = editingProduct ? "PUT" : "POST";
       const url = editingProduct
-        ? `https://swadistchai.onrender.com/api/products/${editingProduct._id}`
-        : "https://swadistchai.onrender.com/api/products";
+        ? `https://tealeafluxe.onrender.com/api/products/${editingProduct._id}`
+        : "https://tealeafluxe.onrender.com/api/products";
 
       const response = await fetch(url, {
         method,
@@ -163,7 +163,7 @@ export default function AdminDashboard() {
 
     try {
       const response = await fetch(
-        `https://swadistchai.onrender.com/api/products/${productId}`,
+        `https://tealeafluxe.onrender.com/api/products/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -236,7 +236,7 @@ export default function AdminDashboard() {
       const formDataObj = new FormData();
       formDataObj.append("image", file);
 
-      const response = await fetch("https://swadistchai.onrender.com/api/products/upload/image", {
+      const response = await fetch("https://tealeafluxe.onrender.com/api/products/upload/image", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -18,7 +18,7 @@ export default function ManageAdmins() {
 
   const fetchAdmins = async () => {
     try {
-      const response = await fetch("https://swadistchai.onrender.com/api/customers?role=admin", {
+      const response = await fetch("https://tealeafluxe.onrender.com/api/customers?role=admin", {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -40,7 +40,7 @@ export default function ManageAdmins() {
     setSuccess("");
 
     try {
-      const response = await fetch("https://swadistchai.onrender.com/api/customers/admin", {
+      const response = await fetch("https://tealeafluxe.onrender.com/api/customers/admin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function ManageAdmins() {
     if (!window.confirm("Are you sure you want to delete this admin?")) return;
 
     try {
-      const response = await fetch(`https://swadistchai.onrender.com/api/customers/${adminId}`, {
+      const response = await fetch(`https://tealeafluxe.onrender.com/api/customers/${adminId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });

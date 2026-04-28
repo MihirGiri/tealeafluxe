@@ -54,7 +54,7 @@ export default function DashboardStats() {
     const fetchStats = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://swadistchai.onrender.com/api/stats", {
+        const response = await fetch("https://tealeafluxe.onrender.com/api/stats", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -124,7 +124,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://swadistchai.onrender.com/api/products");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
@@ -136,7 +136,7 @@ export default function Navbar() {
 
     const fetchOffers = async () => {
       try {
-        const response = await fetch("https://swadistchai.onrender.com/api/banner-offers");
+        const response = await fetch("https://tealeafluxe.onrender.com/api/banner-offers");
         const data = await response.json();
         if (data.success && data.offers && data.offers.length > 0) {
           setOffers(data.offers);

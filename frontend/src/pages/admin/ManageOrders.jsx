@@ -49,8 +49,8 @@ export default function ManageOrders() {
         setLoading(true);
         const url =
           statusFilter === "all"
-            ? "https://swadistchai.onrender.com/api/orders"
-            : `https://swadistchai.onrender.com/api/orders?status=${statusFilter}`;
+            ? "https://tealeafluxe.onrender.com/api/orders"
+            : `https://tealeafluxe.onrender.com/api/orders?status=${statusFilter}`;
 
         const response = await fetch(url, {
           headers: {
@@ -92,7 +92,7 @@ export default function ManageOrders() {
 
     try {
       const response = await fetch(
-        `https://swadistchai.onrender.com/api/orders/${selectedOrder._id}/status`,
+        `https://tealeafluxe.onrender.com/api/orders/${selectedOrder._id}/status`,
         {
           method: "PUT",
           headers: {
@@ -127,7 +127,7 @@ export default function ManageOrders() {
 
     try {
       const response = await fetch(
-        `https://swadistchai.onrender.com/api/orders/${orderId}`,
+        `https://tealeafluxe.onrender.com/api/orders/${orderId}`,
         {
           method: "DELETE",
           headers: {

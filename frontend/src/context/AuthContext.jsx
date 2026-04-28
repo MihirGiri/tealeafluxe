@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = "https://swadistchai.onrender.com/api";
+  const API_URL = "https://tealeafluxe.onrender.com/api";
 
   // Restore user on app load
   useEffect(() => {
