@@ -121,7 +121,7 @@ export default function Checkout() {
         paymentMethod: "cod"
       };
 
-      const response = await fetch("https://tealeafluxe.onrender.com/api/orders", {
+      const response = await fetch("https://swadistchai.onrender.com/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -280,7 +280,7 @@ export default function Checkout() {
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-lg bg-card border border-border overflow-hidden shrink-0 relative">
-                      <img src={item.image.startsWith('/uploads') ? `https://tealeafluxe.onrender.com${item.image}` : item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <img src={item.image.startsWith('/uploads') ? `https://swadistchai.onrender.com${item.image}` : item.image} alt={item.name} className="w-full h-full object-cover" />
                       <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold">{item.quantity}</span>
                     </div>
                     <div className="flex-1">

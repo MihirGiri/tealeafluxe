@@ -1,4 +1,4 @@
-# ✅ TeaLeaf Luxe Setup Checklist
+# ✅ Swadistchai Setup Checklist
 
 Complete this checklist step-by-step to get your platform running.
 
@@ -283,7 +283,7 @@ Your setup is complete when:
 
 ## 🎉 You're Done!
 
-Your TeaLeaf Luxe e-commerce platform is fully set up and running!
+Your Swadistchai e-commerce platform is fully set up and running!
 
 ### Next Steps:
 1. Explore the admin dashboard

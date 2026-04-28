@@ -74,7 +74,7 @@ export default function Signup() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="font-display text-3xl font-semibold text-foreground mb-2">
-              Join TeaLeaf Luxe
+              Join Swadistchai
             </h1>
             <p className="text-foreground/60 text-sm">
               Create your account and explore our premium tea collection

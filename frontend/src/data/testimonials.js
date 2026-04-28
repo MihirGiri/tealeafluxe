@@ -5,7 +5,7 @@ const testimonials = [
     location: "New Delhi, India",
     rating: 5,
     quote:
-      "The Darjeeling First Flush is everything I hoped it would be. You can taste the Himalayan mist in every steep — a pale gold liquor with that unmistakable muscatel note. I've ordered from estates before, but TeaLeaf Luxe's curation is in a different league. The packaging arrived like a piece of jewellery.",
+      "The Darjeeling First Flush is everything I hoped it would be. You can taste the Himalayan mist in every steep — a pale gold liquor with that unmistakable muscatel note. I've ordered from estates before, but Swadistchai's curation is in a different league. The packaging arrived like a piece of jewellery.",
     avatar: "PS",
     tea: "Darjeeling First Flush",
   },
@@ -35,7 +35,7 @@ const testimonials = [
     location: "Kolkata, India",
     rating: 5,
     quote:
-      "Being from Kolkata, I have a complicated relationship with tea — I have opinions. TeaLeaf Luxe's Silver Needle White Tea is the most refined, delicate cup I have experienced outside of Fujian itself. The silvery buds unfurl in the glass pot like a slow dance. The honey sweetness lingers for minutes.",
+      "Being from Kolkata, I have a complicated relationship with tea — I have opinions. Swadistchai's Silver Needle White Tea is the most refined, delicate cup I have experienced outside of Fujian itself. The silvery buds unfurl in the glass pot like a slow dance. The honey sweetness lingers for minutes.",
     avatar: "VB",
     tea: "Silver Needle White Tea",
   },

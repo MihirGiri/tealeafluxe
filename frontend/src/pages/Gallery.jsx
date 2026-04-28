@@ -51,7 +51,7 @@ const GALLERY_ITEMS = [
     title: "Loose Leaf Artistry",
     category: "Products",
     description:
-      "Every blend begins with whole leaves — never broken, never fannings. The integrity of the leaf determines the soul of the cup. This is the TeaLeaf Luxe standard.",
+      "Every blend begins with whole leaves — never broken, never fannings. The integrity of the leaf determines the soul of the cup. This is the Swadistchai standard.",
     image:
       "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=800&q=80&auto=format&fit=crop",
     aspect: "square",
@@ -422,7 +422,7 @@ function Lightbox({ item, onClose, onPrev, onNext, canPrev, canNext }) {
               <ArrowRight size={14} />
             </Link>
             <p className="text-xs text-center text-muted-foreground">
-              TeaLeaf Luxe · Sourced with Reverence
+              Swadistchai · Sourced with Reverence
             </p>
           </div>
         </div>
@@ -724,7 +724,7 @@ export default function Gallery() {
                   className="text-sm font-semibold uppercase tracking-widest"
                   style={{ color: "var(--tea-green)" }}
                 >
-                  Arjun Mehta — Founder & Master Blender, TeaLeaf Luxe
+                  Arjun Mehta — Founder & Master Blender, Swadistchai
                 </p>
               </footer>
             </blockquote>

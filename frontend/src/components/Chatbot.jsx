@@ -9,7 +9,7 @@ export default function Chatbot() {
     {
       id: 1,
       sender: "bot",
-      text: "Hi there! Welcome to TeaLeaf. How can I help you today? You can ask me to 'track order' or 'suggest tea'.",
+      text: "Hi there! Welcome to Swadistchai. How can I help you today? You can ask me to 'track order' or 'suggest tea'.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -44,7 +44,7 @@ export default function Chatbot() {
         // Assume user entered an order number
         setAwaitingOrderNumber(false);
         try {
-          const response = await fetch("https://tealeafluxe.onrender.com/api/orders/track", {
+          const response = await fetch("https://swadistchai.onrender.com/api/orders/track", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ orderNumber: userMessage.text.trim() }),
@@ -115,7 +115,7 @@ export default function Chatbot() {
               <div className="flex items-center gap-2">
                 <Bot size={24} />
                 <div>
-                  <h3 className="font-bold text-sm">TeaLeaf Assistant</h3>
+                  <h3 className="font-bold text-sm">Swadistchai Assistant</h3>
                   <p className="text-amber-100 text-xs">Online</p>
                 </div>
               </div>

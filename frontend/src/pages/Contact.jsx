@@ -27,7 +27,7 @@ const contactInfo = [
     value: "14 Pedder Road, Breach Candy\nMumbai, Maharashtra 400 026",
   },
   { icon: Phone, label: "Call Us", value: "+91 22 6712 4500" },
-  { icon: Mail, label: "Email", value: "hello@tealeafluxe.com" },
+  { icon: Mail, label: "Email", value: "hello@swadistchai.com" },
   {
     icon: Clock,
     label: "Business Hours",

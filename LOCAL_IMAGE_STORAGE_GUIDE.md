@@ -1,4 +1,4 @@
-# 📁 Local Image Storage Guide - TeaLeaf Luxe
+# 📁 Local Image Storage Guide - Swadistchai
 
 ## Feature Overview
 
@@ -404,4 +404,4 @@ Ab admin panel mein local-only image upload system fully functional hai!
 ---
 
 *Last Updated: April 19, 2026*  
-*TeaLeaf Luxe E-Commerce Platform*
+*Swadistchai E-Commerce Platform*

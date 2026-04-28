@@ -1,4 +1,4 @@
-# TeaLeaf Luxe - Complete Setup Guide
+# Swadistchai - Complete Setup Guide
 
 ## Project Structure
 

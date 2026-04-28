@@ -44,7 +44,7 @@ export default function ManageBannerOffers() {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://tealeafluxe.onrender.com/api/banner-offers/admin",
+        "https://swadistchai.onrender.com/api/banner-offers/admin",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -83,8 +83,8 @@ export default function ManageBannerOffers() {
     try {
       const method = editingOffer ? "PUT" : "POST";
       const url = editingOffer
-        ? `https://tealeafluxe.onrender.com/api/banner-offers/${editingOffer._id}`
-        : "https://tealeafluxe.onrender.com/api/banner-offers";
+        ? `https://swadistchai.onrender.com/api/banner-offers/${editingOffer._id}`
+        : "https://swadistchai.onrender.com/api/banner-offers";
 
       const response = await fetch(url, {
         method,
@@ -125,7 +125,7 @@ export default function ManageBannerOffers() {
     }
 
     try {
-      const response = await fetch(`https://tealeafluxe.onrender.com/api/banner-offers/${offerId}`, {
+      const response = await fetch(`https://swadistchai.onrender.com/api/banner-offers/${offerId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

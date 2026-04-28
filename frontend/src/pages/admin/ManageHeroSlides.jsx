@@ -53,7 +53,7 @@ export default function ManageHeroSlides() {
     try {
       setLoading(true);
       const response = await fetch(
-        "https://tealeafluxe.onrender.com/api/hero-slides/admin/all",
+        "https://swadistchai.onrender.com/api/hero-slides/admin/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export default function ManageHeroSlides() {
     try {
       setIsUploading(true);
       setError("");
-      const response = await fetch("https://tealeafluxe.onrender.com/api/upload", {
+      const response = await fetch("https://swadistchai.onrender.com/api/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -105,7 +105,7 @@ export default function ManageHeroSlides() {
 
       setFormData((prev) => ({
         ...prev,
-        image: `https://tealeafluxe.onrender.com${data.imageUrl}`,
+        image: `https://swadistchai.onrender.com${data.imageUrl}`,
       }));
       setSuccess("Image uploaded successfully!");
     } catch (err) {
@@ -128,8 +128,8 @@ export default function ManageHeroSlides() {
     try {
       const method = editingSlide ? "PUT" : "POST";
       const url = editingSlide
-        ? `https://tealeafluxe.onrender.com/api/hero-slides/${editingSlide._id}`
-        : "https://tealeafluxe.onrender.com/api/hero-slides";
+        ? `https://swadistchai.onrender.com/api/hero-slides/${editingSlide._id}`
+        : "https://swadistchai.onrender.com/api/hero-slides";
 
       const response = await fetch(url, {
         method,
@@ -170,7 +170,7 @@ export default function ManageHeroSlides() {
     }
 
     try {
-      const response = await fetch(`https://tealeafluxe.onrender.com/api/hero-slides/${slideId}`, {
+      const response = await fetch(`https://swadistchai.onrender.com/api/hero-slides/${slideId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

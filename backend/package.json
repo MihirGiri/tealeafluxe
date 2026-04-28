@@ -2,7 +2,7 @@
   "name": "@caffeine/backend",
   "version": "1.0.0",
   "type": "module",
-  "description": "TeaLeaf Luxe Backend API",
+  "description": "Swadistchai Backend API",
   "main": "server.js",
   "scripts": {
     "dev": "node --watch server.js",

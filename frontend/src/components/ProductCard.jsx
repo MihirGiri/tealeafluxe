@@ -44,7 +44,7 @@ export default function ProductCard({ product, index = 0 }) {
     if (!imagePath) return FALLBACK_IMAGE;
     if (imagePath.startsWith("http")) return imagePath; // Already full URL
     if (imagePath.startsWith("/uploads/")) {
-      return `https://tealeafluxe.onrender.com${imagePath}`; // Prepend backend URL
+      return `https://swadistchai.onrender.com${imagePath}`; // Prepend backend URL
     }
     return imagePath; // Keep as is for static data
   };

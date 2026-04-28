@@ -210,7 +210,7 @@ export default function Footer() {
                     text: "14 Pedder Road, Breach Candy, Mumbai 400 026",
                   },
                   { Icon: Phone, text: "+91 22 6712 4500" },
-                  { Icon: Mail, text: "hello@tealeafluxe.com" },
+                  { Icon: Mail, text: "hello@swadistchai.com" },
                 ].map(({ Icon, text }) => (
                   <div
                     key={text}
@@ -374,7 +374,7 @@ export default function Footer() {
               className="flex flex-wrap items-center gap-3 text-xs"
               style={{ color: FOOTER_MUTED }}
             >
-              <span>© {year} TeaLeaf Luxe. All rights reserved.</span>
+              <span>© {year} Swadistchai. All rights reserved.</span>
               <span
                 className="hidden sm:block"
                 style={{ color: FOOTER_BORDER }}

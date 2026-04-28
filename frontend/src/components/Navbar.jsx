@@ -14,7 +14,7 @@ const navLinks = [
   { to: "/contact", label: "Contact" },
 ];
 
-/* Premium TeaLeaf Luxe — botanical leaf logo mark + elegant wordmark */
+/* Premium Swadistchai — botanical leaf logo mark + elegant wordmark */
 function TeaLeafLogo({ size = "md", onDark = false }) {
   const imgH = size === "lg" ? 48 : size === "sm" ? 34 : 40;
   const textClass =
@@ -74,8 +74,8 @@ function TeaLeafLogo({ size = "md", onDark = false }) {
           className={`font-display font-semibold ${textClass}`}
           style={{ color: onDark ? "#f0ead8" : undefined }}
         >
-          <span className={onDark ? "" : "text-foreground"}>TeaLeaf</span>{" "}
-          <span style={{ color: "#C9A84C" }}>Luxe</span>
+          <span className={onDark ? "" : "text-foreground"}>Swadist</span>
+          <span style={{ color: "#C9A84C" }}>chai</span>
         </span>
         <span
           className={`font-body font-medium uppercase ${subClass}`}
@@ -124,7 +124,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch("https://swadistchai.onrender.com/api/products");
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
@@ -136,7 +136,7 @@ export default function Navbar() {
 
     const fetchOffers = async () => {
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/banner-offers");
+        const response = await fetch("https://swadistchai.onrender.com/api/banner-offers");
         const data = await response.json();
         if (data.success && data.offers && data.offers.length > 0) {
           setOffers(data.offers);

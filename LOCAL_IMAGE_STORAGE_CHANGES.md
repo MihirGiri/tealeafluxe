@@ -330,4 +330,4 @@ http://localhost:5000/uploads/{filename}
 ---
 
 *Implementation Date: April 19, 2026*  
-*TeaLeaf Luxe Admin System*
+*Swadistchai Admin System*

@@ -59,7 +59,7 @@ export default function AdminLayout({ children }) {
               <Leaf size={18} className="text-primary" />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-foreground leading-none">TeaLeaf Luxe</span>
+              <span className="font-display font-bold text-foreground leading-none">Swadistchai</span>
               <span className="text-[10px] uppercase tracking-widest text-primary font-semibold">Admin Panel</span>
             </div>
           </Link>

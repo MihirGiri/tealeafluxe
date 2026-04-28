@@ -29,11 +29,11 @@ import testimonials from "../data/testimonials";
 const brandStory = [
   {
     lead: "Born in Mumbai, Shaped by Darjeeling",
-    body: "In 2018, Arjun Mehta — a Mumbai-born tea connoisseur who spent three years training with master blenders in Darjeeling's Makaibari estate — founded TeaLeaf Luxe with a single, unwavering conviction: that India's finest teas deserved to reach Indian homes with the same reverence they received abroad. He had tasted what was possible. He refused to accept less.",
+    body: "In 2018, Arjun Mehta — a Mumbai-born tea connoisseur who spent three years training with master blenders in Darjeeling's Makaibari estate — founded Swadistchai with a single, unwavering conviction: that India's finest teas deserved to reach Indian homes with the same reverence they received abroad. He had tasted what was possible. He refused to accept less.",
   },
   {
     lead: "The Sourcing Philosophy",
-    body: "From the beginning, TeaLeaf Luxe made a commitment that defines everything: we visit every garden we source from. No brokers. No middlemen. No exceptions. Our team travels across Darjeeling's fog-wrapped hillsides during first flush season, through the monsoon estates of Upper Assam, and into the high-altitude plots of the Nilgiris Blue Mountains. Slow, intentional, and deeply personal.",
+    body: "From the beginning, Swadistchai made a commitment that defines everything: we visit every garden we source from. No brokers. No middlemen. No exceptions. Our team travels across Darjeeling's fog-wrapped hillsides during first flush season, through the monsoon estates of Upper Assam, and into the high-altitude plots of the Nilgiris Blue Mountains. Slow, intentional, and deeply personal.",
   },
   {
     lead: "From Garden to Cup — Always Whole Leaf",
@@ -355,7 +355,7 @@ export default function About() {
             <p className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-foreground leading-relaxed">
               "We founded{" "}
               <em className="not-italic text-primary font-semibold">
-                TeaLeaf Luxe
+                Swadistchai
               </em>{" "}
               on one belief — that from garden to cup, every leaf carries the
               soul of its origin, and every person who tends it deserves to be
@@ -808,7 +808,7 @@ export default function About() {
             </h2>
             <p className="text-primary-foreground/90 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto">
               Every tea we offer carries the story of the land it came from and
-              the people who tended it. When you choose TeaLeaf Luxe, you are
+              the people who tended it. When you choose Swadistchai, you are
               part of that story.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">

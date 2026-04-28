@@ -1,7 +1,7 @@
 #!/bin/bash
-# Quick Start Guide for TeaLeaf Luxe
+# Quick Start Guide for Swadistchai
 
-echo "🍵 TeaLeaf Luxe - Quick Start"
+echo "🍵 Swadistchai - Quick Start"
 echo "=============================="
 echo ""
 

@@ -1,7 +1,7 @@
-# TeaLeaf Luxe Backend API
+# Swadistchai Backend API
 
 ## Overview
-Node.js/Express backend for TeaLeaf Luxe e-commerce platform with MongoDB integration, JWT authentication, and product management.
+Node.js/Express backend for Swadistchai e-commerce platform with MongoDB integration, JWT authentication, and product management.
 
 ## Prerequisites
 - Node.js 16+

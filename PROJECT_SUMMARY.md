@@ -1,4 +1,4 @@
-# 🍵 TeaLeaf Luxe - Complete E-Commerce Platform Build
+# 🍵 Swadistchai - Complete E-Commerce Platform Build
 
 ## ✅ What's Been Created
 
@@ -280,7 +280,7 @@ FRONTEND_URL=http://localhost:5173
 
 ---
 
-**🎉 Your TeaLeaf Luxe e-commerce platform is ready to scale!**
+**🎉 Your Swadistchai e-commerce platform is ready to scale!**
 
 For detailed setup instructions, see `SETUP.md`
 For API documentation, see `backend/README.md`

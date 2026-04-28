@@ -241,7 +241,7 @@ export default function BlogPost() {
               sip, a reward for presence.
             </p>
             <p>
-              At TeaLeaf Luxe, we believe that the finest teas demand the finest
+              At Swadistchai, we believe that the finest teas demand the finest
               attention. Whether you are a seasoned tea aficionado or at the
               beginning of your journey, we invite you to slow down, brew
               mindfully, and discover what each leaf has to offer.

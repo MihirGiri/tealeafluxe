@@ -1,8 +1,8 @@
 @echo off
-REM TeaLeaf Luxe - Quick Start for Windows
+REM Swadistchai - Quick Start for Windows
 REM =====================================
 
-echo 🍵 TeaLeaf Luxe - Quick Start (Windows)
+echo 🍵 Swadistchai - Quick Start (Windows)
 echo =======================================
 echo.
 
@@ -57,6 +57,6 @@ echo   Backend API: backend\README.md
 echo   Full Setup: SETUP.md
 echo   Project Summary: PROJECT_SUMMARY.md
 echo.
-echo ✨ Your TeaLeaf Luxe platform is ready to go!
+echo ✨ Your Swadistchai platform is ready to go!
 echo.
 pause
