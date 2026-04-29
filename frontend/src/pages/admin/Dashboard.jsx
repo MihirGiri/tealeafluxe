@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "motion/react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import {
-  Plus,
-  Edit,
-  Trash2,
-  LogOut,
-  Package,
   AlertCircle,
   Check,
-  X,
-  Upload,
-  Loader,
-  Link2,
   CheckCircle2,
+  Edit,
+  Link2,
+  Loader,
+  LogOut,
+  Package,
+  Plus,
+  Trash2,
+  Upload,
+  X,
 } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import SectionContainer from "../../components/SectionContainer";
+import { useAuth } from "../../context/AuthContext";
 
 export default function AdminDashboard() {
   const { user, token, logout, isAdmin, loading: authLoading } = useAuth();
@@ -54,7 +54,9 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/products",
+        );
         const data = await response.json();
         if (data.success) {
           setProducts(data.products);
@@ -93,8 +95,10 @@ export default function AdminDashboard() {
 
     // Build images array from form data
     const images = [];
-    if (formData.image) images.push({ url: formData.image, alt: "Main product image" });
-    if (formData.hoverImage) images.push({ url: formData.hoverImage, alt: "Product hover image" });
+    if (formData.image)
+      images.push({ url: formData.image, alt: "Main product image" });
+    if (formData.hoverImage)
+      images.push({ url: formData.hoverImage, alt: "Product hover image" });
     // Add additional images, filtering out empty ones
     formData.additionalImages
       .filter((img) => img)
@@ -105,8 +109,8 @@ export default function AdminDashboard() {
     const payload = {
       ...formData,
       images, // Include full images array
-      price: parseFloat(formData.price),
-      stock: parseInt(formData.stock),
+      price: Number.parseFloat(formData.price),
+      stock: Number.parseInt(formData.stock),
       healthBenefits: formData.healthBenefits
         .split(",")
         .map((b) => b.trim())
@@ -137,7 +141,7 @@ export default function AdminDashboard() {
       // Update local state with the returned product
       if (editingProduct) {
         setProducts(
-          products.map((p) => (p._id === data.product._id ? data.product : p))
+          products.map((p) => (p._id === data.product._id ? data.product : p)),
         );
         setSuccess("Product updated successfully!");
       } else {
@@ -169,7 +173,7 @@ export default function AdminDashboard() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -185,17 +189,19 @@ export default function AdminDashboard() {
 
   const handleEdit = (product) => {
     setEditingProduct(product);
-    
+
     // Extract images from the images array
-    const mainImage = product.image || (product.images && product.images[0]?.url) || "";
-    const hoverImage = product.hoverImage || (product.images && product.images[1]?.url) || "";
+    const mainImage =
+      product.image || (product.images && product.images[0]?.url) || "";
+    const hoverImage =
+      product.hoverImage || (product.images && product.images[1]?.url) || "";
     const additionalImages = Array(8).fill("");
     if (product.images && product.images.length > 2) {
       product.images.slice(2).forEach((img, idx) => {
         if (idx < 8) additionalImages[idx] = img.url;
       });
     }
-    
+
     setFormData({
       name: product.name,
       description: product.description,
@@ -236,19 +242,22 @@ export default function AdminDashboard() {
       const formDataObj = new FormData();
       formDataObj.append("image", file);
 
-      const response = await fetch("https://tealeafluxe.onrender.com/api/products/upload/image", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        "https://tealeafluxe.onrender.com/api/products/upload/image",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formDataObj,
         },
-        body: formDataObj,
-      });
+      );
 
       const data = await response.json();
       if (data.success) {
         // Handle additional images array
         if (imageType.startsWith("additionalImages-")) {
-          const index = parseInt(imageType.split("-")[1]);
+          const index = Number.parseInt(imageType.split("-")[1]);
           setFormData((prev) => {
             const newAdditional = [...prev.additionalImages];
             newAdditional[index] = data.imageUrl;
@@ -264,7 +273,9 @@ export default function AdminDashboard() {
             ...prev,
             [imageType]: data.imageUrl,
           }));
-          setSuccess(`${imageType === "image" ? "Main" : "Hover"} image uploaded successfully!`);
+          setSuccess(
+            `${imageType === "image" ? "Main" : "Hover"} image uploaded successfully!`,
+          );
         }
       } else {
         setError(data.message || "Upload failed");
@@ -290,7 +301,7 @@ export default function AdminDashboard() {
     }
 
     if (imageType.startsWith("additionalImages-")) {
-      const index = parseInt(imageType.split("-")[1]);
+      const index = Number.parseInt(imageType.split("-")[1]);
       setFormData((prev) => {
         const newAdditional = [...prev.additionalImages];
         newAdditional[index] = tempImageUrl;
@@ -325,7 +336,6 @@ export default function AdminDashboard() {
   return (
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <motion.div
@@ -338,7 +348,6 @@ export default function AdminDashboard() {
             </h1>
             <p className="text-foreground/60 mt-2">Welcome, {user?.name}</p>
           </motion.div>
-          
         </div>
 
         {/* Messages */}
@@ -389,7 +398,10 @@ export default function AdminDashboard() {
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-20">
-            <Package size={48} className="mx-auto text-muted-foreground/30 mb-4" />
+            <Package
+              size={48}
+              className="mx-auto text-muted-foreground/30 mb-4"
+            />
             <p className="text-foreground/60">No products found</p>
           </div>
         ) : (
@@ -559,8 +571,6 @@ export default function AdminDashboard() {
                     </select>
                   </div>
 
-
-
                   <div className="grid grid-cols-2 gap-4">
                     {/* Main Image */}
                     <div>
@@ -584,7 +594,9 @@ export default function AdminDashboard() {
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center gap-2">
                               <button
                                 type="button"
-                                onClick={() => startEditingUrl("image", formData.image)}
+                                onClick={() =>
+                                  startEditingUrl("image", formData.image)
+                                }
                                 className="flex items-center gap-1 px-3 py-1.5 rounded-md bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium cursor-pointer transition-smooth"
                                 title="Edit URL"
                               >
@@ -593,15 +605,23 @@ export default function AdminDashboard() {
                               </button>
                               <button
                                 type="button"
-                                onClick={() => setFormData((prev) => ({ ...prev, image: "" }))}
+                                onClick={() =>
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    image: "",
+                                  }))
+                                }
                                 className="p-1.5 rounded-md bg-destructive hover:bg-destructive/90 cursor-pointer transition-smooth"
                               >
-                                <X size={16} className="text-destructive-foreground" />
+                                <X
+                                  size={16}
+                                  className="text-destructive-foreground"
+                                />
                               </button>
                             </div>
                           </div>
                         )}
-                        
+
                         {/* URL Edit Modal */}
                         {editingImageUrl === "image" && (
                           <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/30 space-y-2">
@@ -635,7 +655,9 @@ export default function AdminDashboard() {
                         {/* Upload Button */}
                         <label className="w-full px-4 py-3 rounded-lg border-2 border-dashed border-primary/50 bg-primary/5 text-foreground hover:bg-primary/10 cursor-pointer transition-smooth flex items-center justify-center gap-2 font-medium">
                           <Upload size={18} className="text-primary" />
-                          {formData.image ? "Change Image" : "Upload Main Image"}
+                          {formData.image
+                            ? "Change Image"
+                            : "Upload Main Image"}
                           <input
                             type="file"
                             accept="image/*"
@@ -675,7 +697,12 @@ export default function AdminDashboard() {
                             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center gap-2">
                               <button
                                 type="button"
-                                onClick={() => startEditingUrl("hoverImage", formData.hoverImage)}
+                                onClick={() =>
+                                  startEditingUrl(
+                                    "hoverImage",
+                                    formData.hoverImage,
+                                  )
+                                }
                                 className="flex items-center gap-1 px-3 py-1.5 rounded-md bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium cursor-pointer transition-smooth"
                                 title="Edit URL"
                               >
@@ -684,10 +711,18 @@ export default function AdminDashboard() {
                               </button>
                               <button
                                 type="button"
-                                onClick={() => setFormData((prev) => ({ ...prev, hoverImage: "" }))}
+                                onClick={() =>
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    hoverImage: "",
+                                  }))
+                                }
                                 className="p-1.5 rounded-md bg-destructive hover:bg-destructive/90 cursor-pointer transition-smooth"
                               >
-                                <X size={16} className="text-destructive-foreground" />
+                                <X
+                                  size={16}
+                                  className="text-destructive-foreground"
+                                />
                               </button>
                             </div>
                           </div>
@@ -726,7 +761,9 @@ export default function AdminDashboard() {
                         {/* Upload Button */}
                         <label className="w-full px-4 py-3 rounded-lg border-2 border-dashed border-primary/50 bg-primary/5 text-foreground hover:bg-primary/10 cursor-pointer transition-smooth flex items-center justify-center gap-2 font-medium">
                           <Upload size={18} className="text-primary" />
-                          {formData.hoverImage ? "Change Image" : "Upload Hover Image"}
+                          {formData.hoverImage
+                            ? "Change Image"
+                            : "Upload Hover Image"}
                           <input
                             type="file"
                             accept="image/*"
@@ -750,7 +787,8 @@ export default function AdminDashboard() {
                       Additional Images (Up to 8 more - Upload or Paste URL)
                     </label>
                     <p className="text-xs text-foreground/60 mb-3">
-                      💾 Upload locally or paste a URL (only .jpg, .png, .webp, .gif allowed - max 5MB each)
+                      💾 Upload locally or paste a URL (only .jpg, .png, .webp,
+                      .gif allowed - max 5MB each)
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {formData.additionalImages.map((imgUrl, idx) => (
@@ -772,7 +810,12 @@ export default function AdminDashboard() {
                                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center gap-1">
                                   <button
                                     type="button"
-                                    onClick={() => startEditingUrl(`additionalImages-${idx}`, imgUrl)}
+                                    onClick={() =>
+                                      startEditingUrl(
+                                        `additionalImages-${idx}`,
+                                        imgUrl,
+                                      )
+                                    }
                                     className="flex items-center gap-1 px-2 py-1 rounded-md bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium cursor-pointer transition-smooth"
                                     title="Edit URL"
                                   >
@@ -783,27 +826,43 @@ export default function AdminDashboard() {
                                     type="button"
                                     onClick={() => {
                                       setFormData((prev) => {
-                                        const newAdditional = [...prev.additionalImages];
+                                        const newAdditional = [
+                                          ...prev.additionalImages,
+                                        ];
                                         newAdditional[idx] = "";
-                                        return { ...prev, additionalImages: newAdditional };
+                                        return {
+                                          ...prev,
+                                          additionalImages: newAdditional,
+                                        };
                                       });
                                     }}
                                     className="p-1 rounded-md bg-destructive hover:bg-destructive/90 cursor-pointer transition-smooth"
                                   >
-                                    <X size={12} className="text-destructive-foreground" />
+                                    <X
+                                      size={12}
+                                      className="text-destructive-foreground"
+                                    />
                                   </button>
                                 </div>
                               </>
                             ) : (
                               <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer hover:bg-muted/40 transition-smooth group/upload">
-                                <Upload size={20} className="text-muted-foreground group-hover/upload:text-primary transition-smooth" />
+                                <Upload
+                                  size={20}
+                                  className="text-muted-foreground group-hover/upload:text-primary transition-smooth"
+                                />
                                 <span className="text-xs text-muted-foreground mt-1 text-center px-2">
                                   Image {idx + 3}
                                 </span>
                                 <input
                                   type="file"
                                   accept="image/*"
-                                  onChange={(e) => handleImageUpload(e, `additionalImages-${idx}`)}
+                                  onChange={(e) =>
+                                    handleImageUpload(
+                                      e,
+                                      `additionalImages-${idx}`,
+                                    )
+                                  }
                                   disabled={uploading}
                                   className="hidden"
                                 />
@@ -817,14 +876,18 @@ export default function AdminDashboard() {
                               <input
                                 type="text"
                                 value={tempImageUrl}
-                                onChange={(e) => setTempImageUrl(e.target.value)}
+                                onChange={(e) =>
+                                  setTempImageUrl(e.target.value)
+                                }
                                 placeholder="Paste URL..."
                                 className="w-full px-2 py-1 rounded-lg border border-border bg-muted/30 text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs"
                               />
                               <div className="flex gap-1">
                                 <button
                                   type="button"
-                                  onClick={() => saveImageUrl(`additionalImages-${idx}`)}
+                                  onClick={() =>
+                                    saveImageUrl(`additionalImages-${idx}`)
+                                  }
                                   className="flex-1 px-2 py-0.5 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium transition-smooth"
                                 >
                                   Save
@@ -839,8 +902,6 @@ export default function AdminDashboard() {
                               </div>
                             </div>
                           )}
-
-
                         </div>
                       ))}
                     </div>

@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import {
   CheckCircle,
   ChevronRight,
@@ -10,7 +10,7 @@ import {
   Truck,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard, { StarRating } from "../components/ProductCard";
 import { useCart } from "../context/CartContext";
 
@@ -46,7 +46,9 @@ export default function ProductDetail() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/products",
+        );
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
@@ -166,7 +168,7 @@ export default function ProductDetail() {
                   src={getImageUrl(
                     product.images && product.images[activeThumb]
                       ? product.images[activeThumb].url
-                      : product.image
+                      : product.image,
                   )}
                   alt={product.name}
                   className="w-full h-full object-cover"
@@ -195,37 +197,40 @@ export default function ProductDetail() {
 
             {/* Thumbnails - Show actual uploaded images (only if 2+ images) */}
             {product.images && product.images.length > 1 && (
-            <div className="grid gap-3" style={{
-              gridTemplateColumns: `repeat(auto-fit, minmax(80px, 1fr))`,
-              maxWidth: "100%"
-            }}>
-              {product.images.map((img, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => setActiveThumb(idx)}
-                  aria-label={`View image ${idx + 1}`}
-                  data-ocid={`thumb-${idx}`}
-                  className={[
-                    "rounded-xl overflow-hidden aspect-square border-2 transition-smooth cursor-pointer",
-                    activeThumb === idx
-                      ? "border-primary shadow-tea"
-                      : "border-border hover:border-primary/50",
-                  ].join(" ")}
-                >
-                  <img
-                    src={getImageUrl(img.url)}
-                    alt={img.alt || `${product.name} view ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src = FALLBACK_IMAGE;
-                      e.target.onerror = null;
-                    }}
-                  />
-                </button>
-              ))}
-            </div>
+              <div
+                className="grid gap-3"
+                style={{
+                  gridTemplateColumns: `repeat(auto-fit, minmax(80px, 1fr))`,
+                  maxWidth: "100%",
+                }}
+              >
+                {product.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveThumb(idx)}
+                    aria-label={`View image ${idx + 1}`}
+                    data-ocid={`thumb-${idx}`}
+                    className={[
+                      "rounded-xl overflow-hidden aspect-square border-2 transition-smooth cursor-pointer",
+                      activeThumb === idx
+                        ? "border-primary shadow-tea"
+                        : "border-border hover:border-primary/50",
+                    ].join(" ")}
+                  >
+                    <img
+                      src={getImageUrl(img.url)}
+                      alt={img.alt || `${product.name} view ${idx + 1}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.src = FALLBACK_IMAGE;
+                        e.target.onerror = null;
+                      }}
+                    />
+                  </button>
+                ))}
+              </div>
             )}
           </motion.div>
 
@@ -381,7 +386,7 @@ export default function ProductDetail() {
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25 }}
                     >
-                      {(!product.reviews || product.reviews.length === 0) ? (
+                      {!product.reviews || product.reviews.length === 0 ? (
                         <div className="text-center py-6 text-muted-foreground text-sm">
                           No reviews yet — be the first to review this tea.
                         </div>

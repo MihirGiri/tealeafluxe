@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { Shield, Plus, Check, AlertCircle, Trash2 } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { AlertCircle, Check, Plus, Shield, Trash2 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 export default function ManageAdmins() {
@@ -18,9 +18,12 @@ export default function ManageAdmins() {
 
   const fetchAdmins = async () => {
     try {
-      const response = await fetch("https://tealeafluxe.onrender.com/api/customers?role=admin", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await fetch(
+        "https://tealeafluxe.onrender.com/api/customers?role=admin",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const data = await response.json();
       if (data.success) setAdmins(data.users);
     } catch (err) {
@@ -40,15 +43,18 @@ export default function ManageAdmins() {
     setSuccess("");
 
     try {
-      const response = await fetch("https://tealeafluxe.onrender.com/api/customers/admin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+      const response = await fetch(
+        "https://tealeafluxe.onrender.com/api/customers/admin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData)
-      });
-      
+      );
+
       const data = await response.json();
       if (data.success) {
         setSuccess("Admin created successfully!");
@@ -71,13 +77,16 @@ export default function ManageAdmins() {
     if (!window.confirm("Are you sure you want to delete this admin?")) return;
 
     try {
-      const response = await fetch(`https://tealeafluxe.onrender.com/api/customers/${adminId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await fetch(
+        `https://tealeafluxe.onrender.com/api/customers/${adminId}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       const data = await response.json();
       if (data.success) {
-        setAdmins(admins.filter(a => a._id !== adminId));
+        setAdmins(admins.filter((a) => a._id !== adminId));
         setSuccess("Admin deleted successfully!");
       } else {
         alert(data.message || "Failed to delete admin");
@@ -91,12 +100,17 @@ export default function ManageAdmins() {
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             <h1 className="font-display text-3xl font-semibold text-foreground flex items-center gap-3">
               <Shield className="text-primary" size={28} />
               Manage Admins
             </h1>
-            <p className="text-foreground/60 mt-2">Add or remove administrators for the panel</p>
+            <p className="text-foreground/60 mt-2">
+              Add or remove administrators for the panel
+            </p>
           </motion.div>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -158,15 +172,19 @@ export default function ManageAdmins() {
                       animate={{ opacity: 1 }}
                       className="border-b border-border/50 hover:bg-muted/30 transition-smooth"
                     >
-                      <td className="py-4 px-6 font-medium text-foreground">{admin.name} {admin._id === currentUser?.id && "(You)"}</td>
-                      <td className="py-4 px-6 text-foreground/70">{admin.email}</td>
+                      <td className="py-4 px-6 font-medium text-foreground">
+                        {admin.name} {admin._id === currentUser?.id && "(You)"}
+                      </td>
+                      <td className="py-4 px-6 text-foreground/70">
+                        {admin.email}
+                      </td>
                       <td className="py-4 px-6">
                         <button
                           onClick={() => handleDelete(admin._id)}
                           disabled={admin._id === currentUser?.id}
                           className={`p-2 rounded-lg transition-smooth ${
-                            admin._id === currentUser?.id 
-                              ? "opacity-50 cursor-not-allowed text-foreground/30" 
+                            admin._id === currentUser?.id
+                              ? "opacity-50 cursor-not-allowed text-foreground/30"
                               : "hover:bg-red-500/10 text-foreground/70 hover:text-red-600"
                           }`}
                         >
@@ -177,7 +195,12 @@ export default function ManageAdmins() {
                   ))}
                   {admins.length === 0 && (
                     <tr>
-                      <td colSpan="3" className="py-8 text-center text-foreground/60">No admins found</td>
+                      <td
+                        colSpan="3"
+                        className="py-8 text-center text-foreground/60"
+                      >
+                        No admins found
+                      </td>
                     </tr>
                   )}
                 </tbody>
@@ -202,35 +225,49 @@ export default function ManageAdmins() {
                 onClick={(e) => e.stopPropagation()}
                 className="bg-card rounded-2xl border border-border p-8 max-w-md w-full shadow-xl"
               >
-                <h2 className="font-display text-2xl font-semibold text-foreground mb-6">Create New Admin</h2>
+                <h2 className="font-display text-2xl font-semibold text-foreground mb-6">
+                  Create New Admin
+                </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Name</label>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Name
+                    </label>
                     <input
                       type="text"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
                       className="w-full px-4 py-2 rounded-lg border border-border bg-muted/30 focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Email</label>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Email
+                    </label>
                     <input
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       className="w-full px-4 py-2 rounded-lg border border-border bg-muted/30 focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Password</label>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Password
+                    </label>
                     <input
                       type="password"
                       required
                       value={formData.password}
-                      onChange={(e) => setFormData({...formData, password: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, password: e.target.value })
+                      }
                       className="w-full px-4 py-2 rounded-lg border border-border bg-muted/30 focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>

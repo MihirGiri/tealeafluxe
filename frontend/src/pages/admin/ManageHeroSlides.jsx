@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "motion/react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import {
-  Plus,
-  Edit,
-  Trash2,
-  LogOut,
   AlertCircle,
   Check,
-  X,
+  Edit,
   GripVertical,
-  Upload,
   Loader2,
+  LogOut,
+  Plus,
+  Trash2,
+  Upload,
+  X,
 } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import SectionContainer from "../../components/SectionContainer";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ManageHeroSlides() {
   const { user, token, logout, isAdmin, loading: authLoading } = useAuth();
@@ -58,7 +58,7 @@ export default function ManageHeroSlides() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       const data = await response.json();
       if (data.success) {
@@ -89,13 +89,16 @@ export default function ManageHeroSlides() {
     try {
       setIsUploading(true);
       setError("");
-      const response = await fetch("https://tealeafluxe.onrender.com/api/upload", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        "https://tealeafluxe.onrender.com/api/upload",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: uploadData,
         },
-        body: uploadData,
-      });
+      );
 
       const data = await response.json();
 
@@ -120,7 +123,13 @@ export default function ManageHeroSlides() {
     setError("");
     setSuccess("");
 
-    if (!formData.label || !formData.title || !formData.subtitle || !formData.cta || !formData.image) {
+    if (
+      !formData.label ||
+      !formData.title ||
+      !formData.subtitle ||
+      !formData.cta ||
+      !formData.image
+    ) {
       setError("All fields are required!");
       return;
     }
@@ -147,7 +156,9 @@ export default function ManageHeroSlides() {
       }
 
       if (editingSlide) {
-        setSlides(slides.map((s) => (s._id === data.slide._id ? data.slide : s)));
+        setSlides(
+          slides.map((s) => (s._id === data.slide._id ? data.slide : s)),
+        );
         setSuccess("Slide updated successfully!");
       } else {
         setSlides([...slides, data.slide]);
@@ -170,12 +181,15 @@ export default function ManageHeroSlides() {
     }
 
     try {
-      const response = await fetch(`https://tealeafluxe.onrender.com/api/hero-slides/${slideId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `https://tealeafluxe.onrender.com/api/hero-slides/${slideId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete slide");
@@ -235,9 +249,10 @@ export default function ManageHeroSlides() {
               <GripVertical className="text-primary" size={32} />
               Manage Hero Slides
             </h1>
-            <p className="text-foreground/60 mt-2">Edit your homepage banner images</p>
+            <p className="text-foreground/60 mt-2">
+              Edit your homepage banner images
+            </p>
           </motion.div>
-          
         </div>
 
         {/* Messages */}
@@ -288,7 +303,10 @@ export default function ManageHeroSlides() {
           </div>
         ) : slides.length === 0 ? (
           <div className="text-center py-20">
-            <GripVertical size={48} className="mx-auto text-muted-foreground/30 mb-4" />
+            <GripVertical
+              size={48}
+              className="mx-auto text-muted-foreground/30 mb-4"
+            />
             <p className="text-foreground/60">No slides found</p>
           </div>
         ) : (
@@ -333,7 +351,9 @@ export default function ManageHeroSlides() {
                   </p>
 
                   <div className="flex items-center gap-2 mb-4 py-3 border-t border-b border-border/50">
-                    <span className="text-xs font-medium text-foreground/60">CTA:</span>
+                    <span className="text-xs font-medium text-foreground/60">
+                      CTA:
+                    </span>
                     <span className="text-sm text-foreground">{slide.cta}</span>
                     {!slide.active && (
                       <span className="text-xs bg-yellow-500/20 text-yellow-700 px-2 py-1 rounded ml-auto">
@@ -405,7 +425,11 @@ export default function ManageHeroSlides() {
                     <div className="flex flex-col gap-3">
                       <div className="flex items-center gap-3">
                         <label className="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg cursor-pointer hover:bg-primary/90 transition-smooth font-medium">
-                          {isUploading ? <Loader2 className="animate-spin" size={18} /> : <Upload size={18} />}
+                          {isUploading ? (
+                            <Loader2 className="animate-spin" size={18} />
+                          ) : (
+                            <Upload size={18} />
+                          )}
                           {isUploading ? "Uploading..." : "Upload Image"}
                           <input
                             type="file"
@@ -415,7 +439,9 @@ export default function ManageHeroSlides() {
                             disabled={isUploading}
                           />
                         </label>
-                        <span className="text-sm text-foreground/50">OR provide a URL below</span>
+                        <span className="text-sm text-foreground/50">
+                          OR provide a URL below
+                        </span>
                       </div>
                       <input
                         type="url"
@@ -537,7 +563,10 @@ export default function ManageHeroSlides() {
                       onChange={handleInputChange}
                       className="rounded border-border cursor-pointer"
                     />
-                    <label htmlFor="active" className="text-sm font-medium text-foreground cursor-pointer">
+                    <label
+                      htmlFor="active"
+                      className="text-sm font-medium text-foreground cursor-pointer"
+                    >
                       Active (Show on homepage)
                     </label>
                   </div>

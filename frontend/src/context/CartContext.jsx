@@ -12,7 +12,9 @@ export function CartProvider({ children }) {
       const existing = prev.find((i) => (i._id || i.id) === pId);
       if (existing) {
         return prev.map((i) =>
-          (i._id || i.id) === pId ? { ...i, quantity: i.quantity + quantity } : i,
+          (i._id || i.id) === pId
+            ? { ...i, quantity: i.quantity + quantity }
+            : i,
         );
       }
       return [...prev, { ...product, id: pId, quantity }];

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useNavigate, Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { AlertCircle, Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
-import { Eye, EyeOff, AlertCircle } from "lucide-react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
@@ -61,7 +61,9 @@ export default function Login() {
               className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center gap-3"
             >
               <AlertCircle className="text-red-500" size={20} />
-              <p className="text-red-600 font-medium text-sm">{localError || error}</p>
+              <p className="text-red-600 font-medium text-sm">
+                {localError || error}
+              </p>
             </motion.div>
           )}
 
@@ -69,7 +71,10 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Email Address
               </label>
               <input
@@ -88,7 +93,10 @@ export default function Login() {
             {/* Password */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label htmlFor="password" className="block text-sm font-medium text-foreground">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-foreground"
+                >
                   Password
                 </label>
                 <Link

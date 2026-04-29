@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "motion/react";
 import {
+  AlertCircle,
   BarChart3,
-  TrendingUp,
-  Users,
-  ShoppingCart,
   DollarSign,
   Package,
-  AlertCircle,
   RefreshCw,
+  ShoppingCart,
+  TrendingUp,
+  Users,
 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import SectionContainer from "../../components/SectionContainer";
+import { useAuth } from "../../context/AuthContext";
 
 const StatCard = ({ icon: Icon, label, value, trend, color }) => {
   return (
@@ -26,7 +26,9 @@ const StatCard = ({ icon: Icon, label, value, trend, color }) => {
           <p className="text-gray-600 text-sm font-medium">{label}</p>
           <h3 className="text-2xl font-bold text-gray-900 mt-2">{value}</h3>
           {trend && (
-            <p className={`text-sm mt-2 ${trend > 0 ? "text-green-600" : "text-red-600"}`}>
+            <p
+              className={`text-sm mt-2 ${trend > 0 ? "text-green-600" : "text-red-600"}`}
+            >
               {trend > 0 ? "↑" : "↓"} {Math.abs(trend)}% from last month
             </p>
           )}
@@ -54,11 +56,14 @@ export default function DashboardStats() {
     const fetchStats = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://tealeafluxe.onrender.com/api/stats", {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/stats",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
 
         const data = await response.json();
         if (data.success) {
@@ -103,7 +108,8 @@ export default function DashboardStats() {
     return null;
   }
 
-  const { summary, ordersByStatus, topProducts, recentOrders, monthlyRevenue } = stats;
+  const { summary, ordersByStatus, topProducts, recentOrders, monthlyRevenue } =
+    stats;
 
   // Format currency
   const formatCurrency = (value) => {
@@ -118,7 +124,11 @@ export default function DashboardStats() {
     <div className="max-w-7xl mx-auto">
       <div className="py-8">
         {/* Header */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-8"
+        >
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-2">Welcome back, {user?.name}!</p>
         </motion.div>
@@ -179,12 +189,19 @@ export default function DashboardStats() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-lg shadow-md p-6 mb-8"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Orders by Status</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            Orders by Status
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {ordersByStatus?.map((status) => (
-              <div key={status._id} className="bg-gray-50 p-4 rounded-lg text-center">
+              <div
+                key={status._id}
+                className="bg-gray-50 p-4 rounded-lg text-center"
+              >
                 <p className="text-gray-600 text-sm capitalize">{status._id}</p>
-                <p className="text-2xl font-bold text-amber-600">{status.count}</p>
+                <p className="text-2xl font-bold text-amber-600">
+                  {status.count}
+                </p>
               </div>
             ))}
           </div>
@@ -196,18 +213,31 @@ export default function DashboardStats() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-lg shadow-md p-6 mb-8"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Top Selling Products</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            Top Selling Products
+          </h2>
           <div className="space-y-4">
             {topProducts?.slice(0, 5).map((item, idx) => (
-              <div key={item._id} className="flex items-center justify-between pb-4 border-b last:border-b-0">
+              <div
+                key={item._id}
+                className="flex items-center justify-between pb-4 border-b last:border-b-0"
+              >
                 <div className="flex items-center gap-4">
-                  <span className="text-lg font-bold text-amber-600 w-8">#{idx + 1}</span>
+                  <span className="text-lg font-bold text-amber-600 w-8">
+                    #{idx + 1}
+                  </span>
                   <div>
-                    <p className="font-semibold text-gray-900">{item.product?.name}</p>
-                    <p className="text-sm text-gray-600">{item.totalSold} units sold</p>
+                    <p className="font-semibold text-gray-900">
+                      {item.product?.name}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {item.totalSold} units sold
+                    </p>
                   </div>
                 </div>
-                <p className="font-bold text-gray-900">{formatCurrency(item.totalRevenue)}</p>
+                <p className="font-bold text-gray-900">
+                  {formatCurrency(item.totalRevenue)}
+                </p>
               </div>
             ))}
           </div>
@@ -219,16 +249,28 @@ export default function DashboardStats() {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-lg shadow-md p-6"
         >
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Orders</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            Recent Orders
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">Order ID</th>
-                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">Customer</th>
-                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">Amount</th>
-                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">Status</th>
-                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">Date</th>
+                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                    Order ID
+                  </th>
+                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                    Customer
+                  </th>
+                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                    Amount
+                  </th>
+                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                    Status
+                  </th>
+                  <th className="px-4 py-3 text-left text-gray-600 font-semibold">
+                    Date
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -237,7 +279,9 @@ export default function DashboardStats() {
                     <td className="px-4 py-3 font-mono text-xs text-gray-700">
                       {order.orderNumber}
                     </td>
-                    <td className="px-4 py-3 text-gray-900">{order.user?.name}</td>
+                    <td className="px-4 py-3 text-gray-900">
+                      {order.user?.name}
+                    </td>
                     <td className="px-4 py-3 font-semibold text-gray-900">
                       {formatCurrency(order.orderTotal)}
                     </td>
@@ -247,10 +291,10 @@ export default function DashboardStats() {
                           order.status === "delivered"
                             ? "bg-green-100 text-green-800"
                             : order.status === "cancelled"
-                            ? "bg-red-100 text-red-800"
-                            : order.status === "shipped"
-                            ? "bg-blue-100 text-blue-800"
-                            : "bg-yellow-100 text-yellow-800"
+                              ? "bg-red-100 text-red-800"
+                              : order.status === "shipped"
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-yellow-100 text-yellow-800"
                         }`}
                       >
                         {order.status}

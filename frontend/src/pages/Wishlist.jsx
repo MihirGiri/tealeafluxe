@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Heart, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { useAuth } from "../context/AuthContext";
-import SectionContainer from "../components/SectionContainer";
+import { ArrowRight, Heart, ShoppingBag } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import SectionContainer from "../components/SectionContainer";
+import { useAuth } from "../context/AuthContext";
 
 export default function Wishlist() {
   const { token } = useAuth();
@@ -14,14 +14,17 @@ export default function Wishlist() {
 
   useEffect(() => {
     if (!token) return;
-    
+
     const fetchWishlist = async () => {
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/wishlist", {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/wishlist",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
         const data = await response.json();
         if (data.success) {
           setWishlistProducts(data.wishlist || []);
@@ -96,10 +99,7 @@ export default function Wishlist() {
         ) : error ? (
           <div className="text-center py-20">
             <p className="text-red-600 mb-4">{error}</p>
-            <Link
-              to="/"
-              className="text-primary hover:underline"
-            >
+            <Link to="/" className="text-primary hover:underline">
               Back to home
             </Link>
           </div>
@@ -110,7 +110,10 @@ export default function Wishlist() {
             transition={{ delay: 0.3 }}
             className="text-center py-20"
           >
-            <Heart size={64} className="mx-auto text-muted-foreground/30 mb-4" />
+            <Heart
+              size={64}
+              className="mx-auto text-muted-foreground/30 mb-4"
+            />
             <p className="text-foreground/60 mb-8 text-lg">
               No items in your wishlist yet
             </p>

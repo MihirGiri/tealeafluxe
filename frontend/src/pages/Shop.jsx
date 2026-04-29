@@ -1,7 +1,7 @@
+import { useSearch } from "@tanstack/react-router";
 import { Leaf, SlidersHorizontal, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useMemo, useState, useEffect } from "react";
-import { useSearch } from "@tanstack/react-router";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import FilterSidebar, {
   PRICE_MAX,
   PRICE_MIN,
@@ -34,7 +34,9 @@ export default function Shop() {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/products",
+        );
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
@@ -75,15 +77,16 @@ export default function Shop() {
 
   const filtered = useMemo(() => {
     let result = [...products];
-    
+
     if (searchQuery) {
-      result = result.filter((p) =>
-        p.name?.toLowerCase().includes(searchQuery) ||
-        p.description?.toLowerCase().includes(searchQuery) ||
-        p.category?.toLowerCase().includes(searchQuery)
+      result = result.filter(
+        (p) =>
+          p.name?.toLowerCase().includes(searchQuery) ||
+          p.description?.toLowerCase().includes(searchQuery) ||
+          p.category?.toLowerCase().includes(searchQuery),
       );
     }
-    
+
     if (activeCategories.length > 0) {
       result = result.filter((p) => {
         if (!p.category) return false;
@@ -91,17 +94,19 @@ export default function Shop() {
         return activeCategories.includes(productCatId);
       });
     }
-    
+
     // Price filter
     result = result.filter((p) => p.price >= priceMin && p.price <= priceMax);
-    
+
     // Sorting
     if (sort === "price-asc") result.sort((a, b) => a.price - b.price);
     else if (sort === "price-desc") result.sort((a, b) => b.price - a.price);
     else if (sort === "rating")
       result.sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
     else if (sort === "newest")
-      result.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+      result.sort(
+        (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0),
+      );
     else result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     return result;
   }, [products, activeCategories, priceMin, priceMax, sort, searchQuery]);

@@ -35,7 +35,7 @@ export default function ProductCard({ product, index = 0 }) {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  
+
   // Support both local products (id) and MongoDB products (_id)
   const productId = product._id || product.id;
 

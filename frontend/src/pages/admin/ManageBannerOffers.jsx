@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "motion/react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import {
-  Plus,
-  Edit,
-  Trash2,
-  LogOut,
   AlertCircle,
   Check,
-  X,
+  Edit,
+  LogOut,
   Megaphone,
+  Plus,
+  Trash2,
+  X,
 } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import SectionContainer from "../../components/SectionContainer";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ManageBannerOffers() {
   const { user, token, logout, isAdmin, loading: authLoading } = useAuth();
@@ -49,7 +49,7 @@ export default function ManageBannerOffers() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       const data = await response.json();
       if (data.success) {
@@ -102,7 +102,9 @@ export default function ManageBannerOffers() {
       }
 
       if (editingOffer) {
-        setOffers(offers.map((o) => (o._id === data.offer._id ? data.offer : o)));
+        setOffers(
+          offers.map((o) => (o._id === data.offer._id ? data.offer : o)),
+        );
         setSuccess("Offer updated successfully!");
       } else {
         setOffers([...offers, data.offer]);
@@ -125,12 +127,15 @@ export default function ManageBannerOffers() {
     }
 
     try {
-      const response = await fetch(`https://tealeafluxe.onrender.com/api/banner-offers/${offerId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `https://tealeafluxe.onrender.com/api/banner-offers/${offerId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete offer");
@@ -177,7 +182,9 @@ export default function ManageBannerOffers() {
               <Megaphone className="text-primary" size={28} />
               Manage Banner Offers
             </h1>
-            <p className="text-foreground/60 mt-2">Edit your promotional banner texts</p>
+            <p className="text-foreground/60 mt-2">
+              Edit your promotional banner texts
+            </p>
           </motion.div>
         </div>
 
@@ -229,7 +236,10 @@ export default function ManageBannerOffers() {
           </div>
         ) : offers.length === 0 ? (
           <div className="text-center py-20">
-            <Megaphone size={48} className="mx-auto text-muted-foreground/30 mb-4" />
+            <Megaphone
+              size={48}
+              className="mx-auto text-muted-foreground/30 mb-4"
+            />
             <p className="text-foreground/60">No offers found</p>
           </div>
         ) : (
@@ -334,7 +344,10 @@ export default function ManageBannerOffers() {
                       onChange={handleInputChange}
                       className="rounded border-border cursor-pointer"
                     />
-                    <label htmlFor="active" className="text-sm font-medium text-foreground cursor-pointer">
+                    <label
+                      htmlFor="active"
+                      className="text-sm font-medium text-foreground cursor-pointer"
+                    >
                       Active (Show on banner)
                     </label>
                   </div>

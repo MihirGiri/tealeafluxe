@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "@tanstack/react-router";
-import { motion } from "motion/react";
 import {
-  Eye,
-  Edit2,
-  Trash2,
-  Search,
-  Filter,
-  ChevronDown,
   AlertCircle,
-  RefreshCw,
   CheckCircle,
+  ChevronDown,
   Clock,
-  Truck,
-  X,
-  MapPin,
-  Users,
   DollarSign,
+  Edit2,
+  Eye,
+  Filter,
+  MapPin,
   Package,
+  RefreshCw,
+  Search,
+  Trash2,
+  Truck,
+  Users,
+  X,
 } from "lucide-react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import SectionContainer from "../../components/SectionContainer";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ManageOrders() {
   const { user, token, isAdmin, loading: authLoading } = useAuth();
@@ -82,7 +82,7 @@ export default function ManageOrders() {
       (order) =>
         order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.user?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.user?.email.toLowerCase().includes(searchTerm.toLowerCase())
+        order.user?.email.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredOrders(filtered);
   }, [searchTerm, orders]);
@@ -100,15 +100,15 @@ export default function ManageOrders() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ status: newStatus }),
-        }
+        },
       );
 
       const data = await response.json();
       if (data.success) {
         setOrders(
           orders.map((o) =>
-            o._id === selectedOrder._id ? { ...o, status: newStatus } : o
-          )
+            o._id === selectedOrder._id ? { ...o, status: newStatus } : o,
+          ),
         );
         setShowModal(false);
         setSelectedOrder(null);
@@ -133,7 +133,7 @@ export default function ManageOrders() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (response.ok) {
@@ -191,7 +191,11 @@ export default function ManageOrders() {
     <div className="max-w-7xl mx-auto">
       <div className="py-8">
         {/* Header */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-8"
+        >
           <h1 className="text-3xl font-bold text-gray-900">Manage Orders</h1>
           <p className="text-gray-600 mt-2">View and manage customer orders</p>
         </motion.div>
@@ -286,8 +290,12 @@ export default function ManageOrders() {
                       </td>
                       <td className="px-6 py-4">
                         <div>
-                          <p className="font-medium text-gray-900">{order.user?.name}</p>
-                          <p className="text-sm text-gray-600">{order.user?.email}</p>
+                          <p className="font-medium text-gray-900">
+                            {order.user?.name}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            {order.user?.email}
+                          </p>
                         </div>
                       </td>
                       <td className="px-6 py-4 font-semibold text-gray-900">
@@ -358,7 +366,10 @@ export default function ManageOrders() {
                 Update Order Status
               </h2>
               <p className="text-gray-600 mb-4">
-                Order: <span className="font-mono font-semibold">{selectedOrder?.orderNumber}</span>
+                Order:{" "}
+                <span className="font-mono font-semibold">
+                  {selectedOrder?.orderNumber}
+                </span>
               </p>
               <select
                 value={newStatus}
@@ -406,7 +417,9 @@ export default function ManageOrders() {
                     <h2 className="text-2xl font-bold text-gray-900">
                       Order Details
                     </h2>
-                    <p className="text-gray-600 font-mono mt-1">{selectedOrder.orderNumber}</p>
+                    <p className="text-gray-600 font-mono mt-1">
+                      {selectedOrder.orderNumber}
+                    </p>
                   </div>
                   <button
                     onClick={() => {
@@ -427,8 +440,18 @@ export default function ManageOrders() {
                       Customer Information
                     </h3>
                     <div className="space-y-2 text-sm">
-                      <p className="flex justify-between"><span className="text-gray-500">Name:</span> <span className="font-medium">{selectedOrder.user?.name}</span></p>
-                      <p className="flex justify-between"><span className="text-gray-500">Email:</span> <span className="font-medium">{selectedOrder.user?.email}</span></p>
+                      <p className="flex justify-between">
+                        <span className="text-gray-500">Name:</span>{" "}
+                        <span className="font-medium">
+                          {selectedOrder.user?.name}
+                        </span>
+                      </p>
+                      <p className="flex justify-between">
+                        <span className="text-gray-500">Email:</span>{" "}
+                        <span className="font-medium">
+                          {selectedOrder.user?.email}
+                        </span>
+                      </p>
                     </div>
                   </div>
 
@@ -439,11 +462,27 @@ export default function ManageOrders() {
                       Shipping Address
                     </h3>
                     <div className="space-y-2 text-sm">
-                      <p className="flex justify-between"><span className="text-gray-500">Name:</span> <span className="font-medium">{selectedOrder.shippingAddress?.name || "N/A"}</span></p>
-                      <p className="flex justify-between"><span className="text-gray-500">Phone:</span> <span className="font-medium">{selectedOrder.shippingAddress?.phone || "N/A"}</span></p>
+                      <p className="flex justify-between">
+                        <span className="text-gray-500">Name:</span>{" "}
+                        <span className="font-medium">
+                          {selectedOrder.shippingAddress?.name || "N/A"}
+                        </span>
+                      </p>
+                      <p className="flex justify-between">
+                        <span className="text-gray-500">Phone:</span>{" "}
+                        <span className="font-medium">
+                          {selectedOrder.shippingAddress?.phone || "N/A"}
+                        </span>
+                      </p>
                       <div className="mt-2 pt-2 border-t border-gray-200/50">
-                        <p className="text-gray-600 leading-relaxed">{selectedOrder.shippingAddress?.address}</p>
-                        <p className="text-gray-600">{selectedOrder.shippingAddress?.city}, {selectedOrder.shippingAddress?.state} {selectedOrder.shippingAddress?.pincode}</p>
+                        <p className="text-gray-600 leading-relaxed">
+                          {selectedOrder.shippingAddress?.address}
+                        </p>
+                        <p className="text-gray-600">
+                          {selectedOrder.shippingAddress?.city},{" "}
+                          {selectedOrder.shippingAddress?.state}{" "}
+                          {selectedOrder.shippingAddress?.pincode}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -457,15 +496,21 @@ export default function ManageOrders() {
                     <div className="grid grid-cols-3 gap-4 text-sm">
                       <div>
                         <p className="text-gray-500 mb-1">Method</p>
-                        <p className="font-medium uppercase">{selectedOrder.paymentMethod}</p>
+                        <p className="font-medium uppercase">
+                          {selectedOrder.paymentMethod}
+                        </p>
                       </div>
                       <div>
                         <p className="text-gray-500 mb-1">Status</p>
-                        <p className="font-medium capitalize">{selectedOrder.paymentStatus}</p>
+                        <p className="font-medium capitalize">
+                          {selectedOrder.paymentStatus}
+                        </p>
                       </div>
                       <div>
                         <p className="text-gray-500 mb-1">Total Amount</p>
-                        <p className="font-bold text-amber-600 text-base">{formatCurrency(selectedOrder.orderTotal)}</p>
+                        <p className="font-bold text-amber-600 text-base">
+                          {formatCurrency(selectedOrder.orderTotal)}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -481,15 +526,26 @@ export default function ManageOrders() {
                     <table className="w-full text-sm">
                       <thead className="bg-gray-100 border-b border-gray-200">
                         <tr>
-                          <th className="px-4 py-3 text-left text-gray-700 font-semibold">Product</th>
-                          <th className="px-4 py-3 text-center text-gray-700 font-semibold">Qty</th>
-                          <th className="px-4 py-3 text-right text-gray-700 font-semibold">Price</th>
-                          <th className="px-4 py-3 text-right text-gray-700 font-semibold">Total</th>
+                          <th className="px-4 py-3 text-left text-gray-700 font-semibold">
+                            Product
+                          </th>
+                          <th className="px-4 py-3 text-center text-gray-700 font-semibold">
+                            Qty
+                          </th>
+                          <th className="px-4 py-3 text-right text-gray-700 font-semibold">
+                            Price
+                          </th>
+                          <th className="px-4 py-3 text-right text-gray-700 font-semibold">
+                            Total
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-100">
                         {selectedOrder.items?.map((item, idx) => (
-                          <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                          <tr
+                            key={idx}
+                            className="hover:bg-gray-50 transition-colors"
+                          >
                             <td className="px-4 py-3 text-gray-900 font-medium">
                               {item.product?.name || "Unknown Product"}
                             </td>

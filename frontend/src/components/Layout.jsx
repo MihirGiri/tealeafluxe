@@ -1,14 +1,14 @@
 import { Outlet, useLocation } from "@tanstack/react-router";
+import AdminLayout from "./AdminLayout";
+import Chatbot from "./Chatbot";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import PageTransition from "./PageTransition";
-import Chatbot from "./Chatbot";
-import AdminLayout from "./AdminLayout";
 
 export default function Layout() {
   const location = useLocation();
-  const hideHeaderFooter = 
-    ["/login", "/signup"].includes(location.pathname) || 
+  const hideHeaderFooter =
+    ["/login", "/signup"].includes(location.pathname) ||
     location.pathname.startsWith("/admin");
 
   return (

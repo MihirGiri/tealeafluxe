@@ -1,9 +1,19 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Menu, ShoppingBag, Search, X, LogIn, User, LogOut, Heart, Package } from "lucide-react";
+import {
+  Heart,
+  LogIn,
+  LogOut,
+  Menu,
+  Package,
+  Search,
+  ShoppingBag,
+  User,
+  X,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -116,15 +126,19 @@ export default function Navbar() {
   const userMenuRef = useRef(null);
 
   const filteredProducts = searchQuery.trim()
-    ? products.filter((p) =>
-        p.name.toLowerCase().startsWith(searchQuery.toLowerCase()),
-      ).slice(0, 5)
+    ? products
+        .filter((p) =>
+          p.name.toLowerCase().startsWith(searchQuery.toLowerCase()),
+        )
+        .slice(0, 5)
     : [];
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/products");
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/products",
+        );
         const data = await response.json();
         if (data.success && data.products) {
           setProducts(data.products);
@@ -136,7 +150,9 @@ export default function Navbar() {
 
     const fetchOffers = async () => {
       try {
-        const response = await fetch("https://tealeafluxe.onrender.com/api/banner-offers");
+        const response = await fetch(
+          "https://tealeafluxe.onrender.com/api/banner-offers",
+        );
         const data = await response.json();
         if (data.success && data.offers && data.offers.length > 0) {
           setOffers(data.offers);
@@ -308,7 +324,10 @@ export default function Navbar() {
               </button>
 
               <div ref={searchRef} className="hidden sm:flex flex-col relative">
-                <form onSubmit={handleSearch} className="flex items-center gap-2 bg-muted/50 rounded-full px-3 py-2 border border-border/50 hover:border-border transition-smooth">
+                <form
+                  onSubmit={handleSearch}
+                  className="flex items-center gap-2 bg-muted/50 rounded-full px-3 py-2 border border-border/50 hover:border-border transition-smooth"
+                >
                   <Search size={16} className="text-foreground/50" />
                   <input
                     type="text"
@@ -385,13 +404,22 @@ export default function Navbar() {
                           exit={{ opacity: 0, y: -8, scale: 0.95 }}
                           transition={{ duration: 0.15 }}
                           className="absolute right-0 top-full mt-3 w-48 bg-card border border-border rounded-lg shadow-xl overflow-y-auto max-h-96"
-                          style={{ maxHeight: "calc(100vh - 120px)", zIndex: 99999 }}
+                          style={{
+                            maxHeight: "calc(100vh - 120px)",
+                            zIndex: 99999,
+                          }}
                         >
                           {/* Greeting Message with User Info */}
                           <div className="px-4 py-4 bg-gradient-to-r from-primary/10 to-primary/5 border-b border-primary/20 space-y-2">
-                            <p className="font-display text-sm font-semibold text-primary">Hello, {user.name}!</p>
-                            <p className="text-xs text-foreground/60">Welcome back</p>
-                            <p className="text-xs text-foreground/70 pt-1 border-t border-primary/20">{user.email}</p>
+                            <p className="font-display text-sm font-semibold text-primary">
+                              Hello, {user.name}!
+                            </p>
+                            <p className="text-xs text-foreground/60">
+                              Welcome back
+                            </p>
+                            <p className="text-xs text-foreground/70 pt-1 border-t border-primary/20">
+                              {user.email}
+                            </p>
                             {isAdmin && (
                               <span className="inline-block mt-2 px-2 py-1 bg-primary/20 text-primary text-xs font-semibold rounded-full">
                                 Admin
@@ -409,7 +437,7 @@ export default function Navbar() {
                               <User size={16} />
                               My Profile
                             </Link>
-                            
+
                             {!isAdmin && (
                               <>
                                 <Link
@@ -525,7 +553,10 @@ export default function Navbar() {
               className="sm:hidden border-t border-border bg-card overflow-hidden"
             >
               <div className="p-4">
-                <form onSubmit={handleSearch} className="flex items-center gap-2 bg-muted/50 rounded-full px-4 py-2 border border-border/50 focus-within:border-primary/50 transition-smooth">
+                <form
+                  onSubmit={handleSearch}
+                  className="flex items-center gap-2 bg-muted/50 rounded-full px-4 py-2 border border-border/50 focus-within:border-primary/50 transition-smooth"
+                >
                   <Search size={16} className="text-foreground/50" />
                   <input
                     type="text"

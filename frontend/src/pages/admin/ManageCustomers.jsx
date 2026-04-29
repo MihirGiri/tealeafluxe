@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "@tanstack/react-router";
-import { motion } from "motion/react";
 import {
-  Users,
-  Search,
-  Edit2,
-  Trash2,
-  Mail,
-  Phone,
-  MapPin,
   AlertCircle,
-  RefreshCw,
+  Edit2,
   Eye,
+  Mail,
+  MapPin,
+  Phone,
+  RefreshCw,
+  Search,
+  Trash2,
+  Users,
 } from "lucide-react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import SectionContainer from "../../components/SectionContainer";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ManageCustomers() {
   const { token, isAdmin, loading: authLoading } = useAuth();
@@ -46,7 +46,7 @@ export default function ManageCustomers() {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
 
         const data = await response.json();
@@ -73,7 +73,7 @@ export default function ManageCustomers() {
       (customer) =>
         customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (customer.phone && customer.phone.includes(searchTerm))
+        (customer.phone && customer.phone.includes(searchTerm)),
     );
     setFilteredCustomers(filtered);
   }, [searchTerm, customers]);
@@ -105,15 +105,15 @@ export default function ManageCustomers() {
             state: editData.state,
             pincode: editData.pincode,
           }),
-        }
+        },
       );
 
       const data = await response.json();
       if (data.success) {
         setCustomers(
           customers.map((c) =>
-            c._id === selectedCustomer._id ? data.user : c
-          )
+            c._id === selectedCustomer._id ? data.user : c,
+          ),
         );
         setShowModal(false);
         setSelectedCustomer(null);
@@ -138,7 +138,7 @@ export default function ManageCustomers() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (response.ok) {
@@ -165,9 +165,15 @@ export default function ManageCustomers() {
     <div className="max-w-7xl mx-auto">
       <div className="py-8">
         {/* Header */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-8"
+        >
           <h1 className="text-3xl font-bold text-gray-900">Manage Customers</h1>
-          <p className="text-gray-600 mt-2">View and manage customer accounts</p>
+          <p className="text-gray-600 mt-2">
+            View and manage customer accounts
+          </p>
         </motion.div>
 
         {error && (

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useNavigate, Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { AlertCircle, Check, Eye, EyeOff } from "lucide-react";
 import { motion } from "motion/react";
-import { Eye, EyeOff, Check, AlertCircle } from "lucide-react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 export default function Signup() {
@@ -49,7 +49,7 @@ export default function Signup() {
       formData.name,
       formData.email,
       formData.password,
-      formData.confirmPassword
+      formData.confirmPassword,
     );
 
     if (result.success) {
@@ -89,7 +89,9 @@ export default function Signup() {
               className="mb-6 p-4 rounded-lg bg-accent/10 border border-accent/30 flex items-center gap-3"
             >
               <Check className="text-accent" size={20} />
-              <p className="text-accent font-medium">Account created successfully!</p>
+              <p className="text-accent font-medium">
+                Account created successfully!
+              </p>
             </motion.div>
           )}
 
@@ -101,7 +103,9 @@ export default function Signup() {
               className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center gap-3"
             >
               <AlertCircle className="text-red-500" size={20} />
-              <p className="text-red-600 font-medium text-sm">{localError || error}</p>
+              <p className="text-red-600 font-medium text-sm">
+                {localError || error}
+              </p>
             </motion.div>
           )}
 
@@ -109,7 +113,10 @@ export default function Signup() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Full Name
               </label>
               <input
@@ -125,7 +132,10 @@ export default function Signup() {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Email Address
               </label>
               <input
@@ -141,7 +151,10 @@ export default function Signup() {
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Password
               </label>
               <div className="relative">
@@ -166,7 +179,10 @@ export default function Signup() {
 
             {/* Confirm Password */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-2">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
                 Confirm Password
               </label>
               <div className="relative">
@@ -184,7 +200,11 @@ export default function Signup() {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/50 hover:text-foreground transition-colors"
                 >
-                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showConfirmPassword ? (
+                    <EyeOff size={18} />
+                  ) : (
+                    <Eye size={18} />
+                  )}
                 </button>
               </div>
             </div>
@@ -197,7 +217,11 @@ export default function Signup() {
               disabled={loading || success}
               className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold text-sm hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
-              {loading ? "Creating Account..." : success ? "Account Created!" : "Create Account"}
+              {loading
+                ? "Creating Account..."
+                : success
+                  ? "Account Created!"
+                  : "Create Account"}
             </motion.button>
           </form>
 
